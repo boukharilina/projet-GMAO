@@ -99,6 +99,18 @@
 				</li>
 				@endcan
 
+				@can('view-tache')
+				<li class="submenu">
+					<a href="#"><i class="fe fe-document"></i> <span>Tâches divers</span> <span class="menu-arrow"></span></a>
+					<ul style="display: none;">
+						<li><a class="{{ route_is('taches.*') ? 'active' : '' }}" href="{{route('taches.index')}}">Tâches</a></li>
+						@can('create-tache')
+						<li><a class="{{ route_is('taches.create') ? 'active' : '' }}" href="{{route('taches.create')}}">Ajouter tâche</a></li>
+						@endcan
+					</ul>
+				</li>
+				@endcan
+
 				@can('view-reports')
 				<li class="submenu">
 					<a href="#"><i class="fe fe-document"></i> <span> Rapports</span> <span class="menu-arrow"></span></a>

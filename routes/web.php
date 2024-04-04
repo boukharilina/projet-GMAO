@@ -28,6 +28,7 @@ use App\Http\Controllers\Admin\EtatController;
 use App\Http\Controllers\Admin\ContratController;
 use App\Http\Controllers\Admin\SoustraitantController;
 use App\Http\Controllers\Admin\SousinterventionController;
+use App\Http\Controllers\Admin\TacheController;
 use App\Http\livewire\Calendar ;
 
 /*
@@ -92,6 +93,9 @@ Route::middleware(['auth'])->group(function(){
 
     /*clients routes*/
     Route::resource('clients',ClientController::class);
+
+    /*taches routes*/
+    Route::resource('taches',TacheController::class);
 
 
     /*modalites routes*/

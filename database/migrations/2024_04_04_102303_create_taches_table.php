@@ -18,8 +18,8 @@ class CreateTachesTable extends Migration
             $table->datetime('date');
             $table->string('type');
             $table->string('fournisseur');
-            $table->string('commentaire');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('commentaire')->nullable();
+            $table->string('user');
             $table->softDeletes();
             $table->timestamps();
         });
