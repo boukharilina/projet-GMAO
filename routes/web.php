@@ -11,13 +11,8 @@ use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\Auth\RegisterController;
 use App\Http\Controllers\Admin\Auth\ResetPasswordController;
 use App\Http\Controllers\Admin\Auth\ForgotPasswordController;
-use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PermissionController;
-use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\RoleController;
-use App\Http\Controllers\Admin\SaleController;
-use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\ModalitesController;
 use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\EquipementController;
@@ -29,7 +24,7 @@ use App\Http\Controllers\Admin\ContratController;
 use App\Http\Controllers\Admin\SoustraitantController;
 use App\Http\Controllers\Admin\SousinterventionController;
 use App\Http\Controllers\Admin\TacheController;
-use App\Http\livewire\Calendar ;
+use App\Http\livewire\Calendar;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,7 +55,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('interventions/reports',[InterventionController::class,'reports'])->name('interventions.report');
     Route::post('interventions/reports',[InterventionController::class,'generateReport']);
 
-   /*equipments*/
+   /*equipments routes*/
     Route::get('equipements/reports',[EquipementController::class,'reports'])->name('equipements.report');
     Route::post('equipements/reports',[EquipementController::class,'generateReport']);
     Route::post('/equipements/report/search',[EquipementController::class,'generateReport'])->name('equipements.report.search');
@@ -68,7 +63,7 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/UpdategetEquipements', [EquipementController::class, 'UpdategetEquipements']);
 
 
-    /*Calendrier*/
+    /*Calendrier routes*/
    Route::get('fullcalendar', [CalendarController::class, 'index']);
    Route::get('/events', [CalendarController::class, 'getEvents']);
    Route::delete('/calendar/{id}', [CalendarController::class, 'deleteEvent']);
@@ -80,22 +75,23 @@ Route::middleware(['auth'])->group(function(){
 
    Route::get('/calender', function () {
     return view('home');
-});
-
-    Route::get('backup', [BackupController::class,'index'])->name('backup.index');
-    Route::put('backup/create', [BackupController::class,'create'])->name('backup.store');
-    Route::get('backup/download/{file_name?}', [BackupController::class,'download'])->name('backup.download');
-    Route::delete('backup/delete/{file_name?}', [BackupController::class,'destroy'])->where('file_name', '(.*)')->name('backup.destroy');
-
-    Route::get('settings',[SettingController::class,'index'])->name('settings');
+    });
     /*sous traitants routes*/
     Route::resource('soustraitants',SoustraitantController::class);
 
     /*clients routes*/
     Route::resource('clients',ClientController::class);
-
+ 
     /*taches routes*/
     Route::resource('taches',TacheController::class);
+
+    /*backup routes*/
+    Route::get('backup', [BackupController::class,'index'])->name('backup.index');
+    Route::put('backup/create', [BackupController::class,'create'])->name('backup.store');
+    Route::get('backup/download/{file_name?}', [BackupController::class,'download'])->name('backup.download');
+    Route::delete('backup/delete/{file_name?}', [BackupController::class,'destroy'])->where('file_name', '(.*)')->name('backup.destroy');
+    Route::get('settings',[SettingController::class,'index'])->name('settings');
+
 
 
     /*modalites routes*/

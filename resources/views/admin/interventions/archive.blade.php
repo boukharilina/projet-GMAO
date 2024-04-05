@@ -23,7 +23,7 @@
 <div class="row">
 	<div class="col-md-12">
 
-		<!-- Recent Orders -->
+		<!-- index-->
 		<div class="card">
 			<div class="card-body">
 				<div class="table-responsive">
@@ -56,7 +56,7 @@
 				</div>
 			</div>
 		</div>
-		<!-- /Recent Orders -->
+		<!-- /index-->
 
 	</div>
 </div>

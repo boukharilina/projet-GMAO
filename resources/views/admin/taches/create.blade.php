@@ -32,7 +32,7 @@
 							<div class="form-group">
 								<label>Technicien(s)<span class="text-danger">*</span></label>
 								<select  class="select2 form-select form-control" name="user[]" multiple>
-									<option >Sélectionner le technicien(s)</option>
+									<option >Sélectionner le(s) technicien(s)</option>
 										@foreach($users as $user)
 											<option value="{{ $user->name }}">{{ $user->name }}</option>
 										@endforeach

@@ -31,12 +31,12 @@
 							<div class="col-lg-4">
 								<div class="form-group">
 								<label for="client">Client<span class="text-danger">*</span></label>
-								<select id="client" onchange="getEquipements(this.value)" class="select2 form-select form-control" name="client">
-									<option value="Sélectionner un Client">Sélectionner un Client</option>
-									@foreach ($clients as $client)
-										<option value="{{ $client->id }}">{{ $client->name }}</option>
-									@endforeach
-								</select>
+									<select id="client" onchange="getEquipements(this.value)" class="select2 form-select form-control" name="client">
+										<option value="Sélectionner un Client">Sélectionner un Client</option>
+										@foreach ($clients as $client)
+											<option value="{{ $client->id }}">{{ $client->name }}</option>
+										@endforeach
+									</select>
 							    </div>
 							</div>
 
@@ -49,14 +49,14 @@
 							</div>
 						</div>
 
-						<div class="col-lg-4">
-							<div class="form-group">
+							<div class="col-lg-4">
+								<div class="form-group">
 								<label for="sousequipment">Sous equipement</label>
-								<select id="sousequipement" class="select2 form-select form-control" name="sousequipement">
-									<option value="Sélectionner un sous equipment">Sélectionner un sous equipment</option>
-								</select>
+									<select id="sousequipement" class="select2 form-select form-control" name="sousequipement">
+										<option value="Sélectionner un sous equipment">Sélectionner un sous equipment</option>
+									</select>
+								</div>
 							</div>
-						</div>
 						</div>
 					</div>
 
@@ -74,6 +74,7 @@
                                     </select>
 								</div>
 							</div>
+							
 							<div class="col-lg-6">
 								<div class="form-group">
 									<label>Description panne<span class="text-danger">*</span></label>

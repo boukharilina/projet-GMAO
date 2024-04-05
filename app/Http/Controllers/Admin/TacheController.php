@@ -119,9 +119,9 @@ class TacheController extends Controller
      * @param  \app\Models\Tache $tache
      * @return \Illuminate\Http\Response
      */
-    public function edit(tache $tache)
+    public function edit(Tache $tache)
     {
-        $title = 'edit tache';
+        $title = 'modifier tâche';
         return view('admin.taches.edit',compact(
             'title','tache'
         ));
@@ -134,7 +134,7 @@ class TacheController extends Controller
      * @param  \app\Models\tache $tache
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, tache $tache)
+    public function update(Request $request, Tache $tache)
     {
         $this->validate($request,[
             'date'=>'required'
@@ -143,12 +143,12 @@ class TacheController extends Controller
 
         $tache->update([
             'date'=>$request->date,
-            'address'=>$request->address,
             'type'=>$request->type,
-            'phone'=>$request->phone,
-            'fax'=>$request->fax,
+            'fournisseur'=>$request->fournisseur,
+            'commentaire'=>$request->commentaire,
+            'user'=>$request->user,
         ]);
-        $notification = notify("tache modifié avec succès");
+        $notification = notify("tâche modifié avec succès");
         return redirect()->route('taches.index')->with($notification);
     }
 
@@ -160,7 +160,7 @@ class TacheController extends Controller
      */
     public function destroy(Request $request)
     {
-        return tache::findOrFail($request->id)->delete();
+        return Tache::findOrFail($request->id)->delete();
     }
 
 }
