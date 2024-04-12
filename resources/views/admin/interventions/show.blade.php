@@ -48,10 +48,11 @@
 							<div class="card-body">
 								<h5 class="card-title d-flex justify-content-between">
 									<span>Aperçu</span>
-                                    @if(!auth()->user()->role === 'super-admin')
+                                    @if(!auth()->user()->role === 'Super-admin')
 									<a class="edit-link" data-toggle="modal" href="#edit_intervention_details"><i class="fa fa-edit mr-1"></i>Modifier</a>
                                   	@endif
                                     <a class="edit-link" data-toggle="modal" href="#ajout_sousintervention"><i class="fa fa-edit mr-1"></i>Ajouter sous-intervention</a>
+									<a class="edit-link" data-toggle="modal" href="#ajout_piece"><i class="fa fa-edit mr-1"></i>Ajouter pièce</a>
 									<span class="label label-primary"></span>
 
 								</h5>
@@ -253,6 +254,62 @@
 						<!-- /Ajout sous-intervention -->
 						</div>
 
+						<!-- Ajout pièce remplacée-->
+						<div class="modal fade" id="ajout_piece" aria-hidden="true" role="dialog">
+							<div class="modal-dialog modal-dialog-centered" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title">Ajouter pièce remplacée</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<form method="post" enctype="multipart/form-data" action="{{ route('pieces.store', ['intervention_id' => $intervention->id]) }}">
+										@csrf
+											<div class="row form-row">
+												<div class="col-12">
+                                                    <div class="form-group">
+                                                        <label>Désignation<span class="text-danger">*</span></label>
+             											<input type="text" name="designation" class="form-control" placeholder="Saisir la désignation">
+                                                    </div>
+												</div>
+												<div class="col-12">
+                                                    <div class="form-group">
+                                                        <label>Référence/code<span class="text-danger">*</span></label>
+             											<input type="text" name="reference" class="form-control" placeholder="Saisir la reference">
+                                                    </div>
+												</div>
+
+												<div class="col-12">
+													<div class="form-group">
+														<label>Numéro de série</label>
+														<input type="text" name="numserie" class="form-control" placeholder="Saisir le numéro de serie">
+													</div>
+												</div>
+
+												<div class="col-12">
+													<div class="form-group">
+														<label>Date de remplacement<span class="text-danger">*</span></label>
+														<input type="date" name="date_remplacement" class="form-control" placeholder="Saisir la date de remplacement">
+													</div>
+												</div>
+
+												<div class="col-12">
+													<div class="form-group">
+														<label>Quantité</label>
+														<input type="number" name="qte" class="form-control" placeholder="Saisir la quantité">
+													</div>
+												</div>
+											<button type="submit" class="btn btn-primary btn-block">Valider</button>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- /Ajout pièce remplacée -->
+						</div>
+
                     <!-- /Aperçu intervention -->
 
 					<!-- index Sous interventions -->
@@ -263,7 +320,7 @@
                     @else
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="text-uppercase"><span class="badge rounded-pill bg-info text-light">Historique des sous-interventions</span></h4>
+                                <h4 class="text-uppercase"><span class="badge rounded-pill bg-primary text-light">Historique des sous-interventions</span></h4>
 									<div class="table-responsive">
 										<table id="sousinterventions-table" class="table table-bordered">
 											<thead>
@@ -280,7 +337,7 @@
                                                 <tbody>
                                                 @foreach ($sousinterventions as $sousintervention)
                                                     <tr>
-                                                    <td>{{$sousintervention->date_debut}}</td>
+                                                    <td>{{date('d-m-Y h:m A', strtotime($sousintervention->date_debut))}}</td>
                                                     <td>{{$sousintervention->etat_initial}}</td>
                                                     <td>
                                                         @if (is_array($sousintervention->intervenant))
@@ -291,7 +348,7 @@
                                                     </td>
                                                     <td>{{$sousintervention->description_panne}}</td>
                                                     <td>{{$sousintervention->etat_final}}</td>
-                                                    <td>{{$sousintervention->date_fin}}</td>
+                                                    <td>{{date('d-m-Y h:m A',strtotime($sousintervention->date_fin))}}</td>
                                                     <td>
                                                         <!-- Bouton "Edit" pour chaque sous-intervention -->
                                                         <a data-placement="top" title="Modifier" class='btn btn-info edit-link' data-toggle="modal" data-target="#edit_sousintervention_{{$sousintervention->id}}">
@@ -300,6 +357,52 @@
                                                         <!-- Bouton "Supprimer" pour chaque sous-intervention -->
                                                         <a data-toggle="tooltip" data-placement="top" title="Supprimer" class='btn btn-danger' route='interventions.destroy' onclick="return confirm('Voulez-vous vraiment supprimer la demande {{$sousintervention->id}} ?')">
                                                             <i class="fas fa-trash"></i>
+                                                        </a>
+                                                    </td>
+                                                    </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                    @endif
+
+					<!-- /index Sous interventions -->
+
+					<!-- index Sous interventions -->
+                    @if($intervention->pieces->isEmpty())
+                        <div class="p-3 mb-2 bg-warning text-light">
+                            <h6 class="text-center">Pas de pièces remplacées.</h6>
+                        </div>
+                    @else
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="text-uppercase"><span class="badge rounded-pill bg-primary text-light">Pièces remplacées</span></h4>
+									<div class="table-responsive">
+										<table id="pieces-table" class="table table-bordered">
+											<thead>
+                                                <tr class="text-uppercase">
+                                                    <th>Désignation</th>
+                                                    <th>reférence</th>
+                                                    <th>numéro de série</th>
+                                                    <th>date de remplacement</th>
+                                                    <th>quantité</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                @foreach ($pieces as $piece)
+                                                    <tr>
+                                                    <td>{{$piece->designation}}</td>
+                                                    <td>{{$piece->reference}}</td>
+                                                    <td>{{$piece->numserie}}</td>
+                                                    <td>{{date('d-m-Y', strtotime($piece->date_remplacement))}}</td>
+                                                    <td>{{$piece->qte}}</td>
+                                                    <td>
+                                                        <!-- Bouton "Edit" pour chaque sous-intervention -->
+														<a data-placement="top" title="Modifier" class='btn btn-info edit-link' data-toggle="modal" data-target="#edit_piece_{{$sousintervention->id}}">
+                                                            <i class="fas fa-edit"></i>
                                                         </a>
                                                     </td>
                                                     </tr>
@@ -455,6 +558,64 @@
 					@endforeach
 					<!-- /Edit Modal des sous-intervention -->
             </div>
+
+			<!-- Edit Modal pièce remplacée-->
+			@foreach($sousinterventions as $sousintervention)
+			<div class="modal fade" id="edit_piece_{{$sousintervention->id}}" aria-hidden="true" role="dialog">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Modifier pièce remplacée</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+
+							<form method="post" enctype="multipart/form-data" action="{{route('pieces.update',$piece->id)}}">
+								@csrf
+								@method("PUT")
+								<div class="col-12">
+									<div class="form-group">
+										<label>Désignation<span class="text-danger">*</span></label>
+										<input class="form-control" type="text" name="designation" value="{{$piece->designation}}">
+									</div>
+								</div>
+								<div class="col-12">
+									<div class="form-group">
+										<label>Référence/code<span class="text-danger">*</span></label>
+										<input class="form-control" type="text" name="reference" value="{{$piece->reference}}">
+									</div>
+								</div>
+
+								<div class="col-12">
+									<div class="form-group">
+										<label>Numéro de série</label>
+										<input class="form-control" type="text" name="numserie" value="{{$piece->numserie}}">
+									</div>
+								</div>
+
+								<div class="col-12">
+									<div class="form-group">
+										<label>Intervenant(s)</label>
+										<input class="form-control" type="date" name="date_remplacement" value="{{$piece->date_remplacement}}">			
+									</div>
+								</div>
+
+								<div class="col-12">
+									<div class="form-group">
+										<label>Quantité</label>
+										<input type="number" name="qte" class="form-control" value="{{$piece->qte ?? old('qte')}}">
+									</div>
+								</div>
+								<button type="submit" class="btn btn-primary btn-block">Modifier</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			@endforeach
+			<!-- /Edit Modal des sous-intervention -->
         </div>
     </div>
 
@@ -465,6 +626,7 @@
         <script>
             $(document).ready(function () {
                 $('#sousinterventions-table').DataTable();
+				$('#pieces-table').DataTable();
             });
         </script>
     @endpush

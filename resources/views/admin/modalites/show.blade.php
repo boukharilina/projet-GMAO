@@ -87,4 +87,5 @@
         $('#equipement-modalite-table').DataTable();
     });
 </script>
+
 @endpush

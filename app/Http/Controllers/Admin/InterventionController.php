@@ -244,9 +244,10 @@ class InterventionController extends Controller
         $users= User::get();
         $soustraitants = Soustraitant::get();
         $sousinterventions = $intervention->sousinterventions;
+        $pieces = $intervention->pieces;
         return view('admin.interventions.show',compact(
             'title','clients','sousequipements','intervention',
-            'users','equipements','soustraitants','sousinterventions'
+            'users','equipements','soustraitants','sousinterventions','pieces'
 
         ));
     }
