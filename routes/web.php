@@ -29,6 +29,7 @@ use App\Http\Controllers\Admin\ContratController;
 use App\Http\Controllers\Admin\SoustraitantController;
 use App\Http\Controllers\Admin\SousinterventionController;
 use App\Http\Controllers\Admin\TacheController;
+use App\Http\Controllers\Admin\PieceController;
 use App\Http\livewire\Calendar ;
 
 /*
@@ -101,6 +102,7 @@ Route::middleware(['auth'])->group(function(){
     /*modalites routes*/
     Route::resource('modalites',ModalitesController::class);
     Route::put('modalites',[ModalitesController::class,'update'])->name('modalites.update');
+    Route::get('modalites/reports',[ModalitesController::class,'reports'])->name('modalites.report');
 
     /*departements routes*/
     Route::resource('departements',DepartementController::class)->only(['index','store','destroy']);
@@ -136,6 +138,10 @@ Route::middleware(['auth'])->group(function(){
     /*sous interventions routes*/
     Route::post('sousinterventions/{intervention_id}/store', [SousinterventionController::class,'store'])->name('sousinterventions.store');
     Route::resource('sousinterventions',SousinterventionController::class)->except('create','store','show');
+
+    /*pièces remplacées routes*/
+    Route::post('pieces/{intervention_id}/store', [PieceController::class,'store'])->name('pieces.store');
+    Route::resource('pieces',PieceController::class)->except('create','store','show');
 });
 
     Route::middleware(['guest'])->group(function () {

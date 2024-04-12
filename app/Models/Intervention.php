@@ -46,4 +46,9 @@ class Intervention extends Model
         return $this->HasMany(Sousintervention::class);
     }
 
+    public function pieces():HasMany
+    {
+        return $this->HasMany(Piece::class);
+    }
+
 }
