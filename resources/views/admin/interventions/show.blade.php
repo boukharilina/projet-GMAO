@@ -270,6 +270,25 @@
 											<div class="row form-row">
 												<div class="col-12">
                                                     <div class="form-group">
+                                                    <label>Client<span class="text-danger">*</span></label>
+														<select id="client" onchange="getEquipements(this.value)" class="select2 form-select form-control" name="client">
+															<option value="Sélectionner un Client">Sélectionner un Client</option>
+															@foreach ($clients as $client)
+																<option value="{{ $client->id }}">{{ $client->name }}</option>
+															@endforeach
+														</select>
+                                                    </div>
+												</div>
+												<div class="col-12">
+                                                    <div class="form-group">
+													<label for="equipement">Equipement<span class="text-danger">*</span></label>
+														<select id="equipement" onchange="getSousequipements(this.value)" class="select2 form-select form-control" name="equipement">
+															<option value="Sélectionner un equipement">Sélectionner un equipement</option>
+														</select>
+													</div>
+												</div>
+												<div class="col-12">
+                                                    <div class="form-group">
                                                         <label>Désignation<span class="text-danger">*</span></label>
              											<input type="text" name="designation" class="form-control" placeholder="Saisir la désignation">
                                                     </div>
@@ -370,7 +389,7 @@
 
 					<!-- /index Sous interventions -->
 
-					<!-- index Sous interventions -->
+					<!-- index pièces de repmlacement-->
                     @if($intervention->pieces->isEmpty())
                         <div class="p-3 mb-2 bg-warning text-light">
                             <h6 class="text-center">Pas de pièces remplacées.</h6>
@@ -401,7 +420,7 @@
                                                     <td>{{$piece->qte}}</td>
                                                     <td>
                                                         <!-- Bouton "Edit" pour chaque sous-intervention -->
-														<a data-placement="top" title="Modifier" class='btn btn-info edit-link' data-toggle="modal" data-target="#edit_piece_{{$sousintervention->id}}">
+														<a data-placement="top" title="Modifier" class='btn btn-info edit-link' data-toggle="modal" data-target="#edit_piece_{{$piece->id}}">
                                                             <i class="fas fa-edit"></i>
                                                         </a>
                                                     </td>
@@ -414,7 +433,7 @@
                                 </div>
                     @endif
 
-					<!-- /index Sous interventions -->
+					<!-- /index pièces remplacées -->
 
 					<!-- Edit Modal des sous-intervention -->
 					@foreach($sousinterventions as $sousintervention)
@@ -560,8 +579,8 @@
             </div>
 
 			<!-- Edit Modal pièce remplacée-->
-			@foreach($sousinterventions as $sousintervention)
-			<div class="modal fade" id="edit_piece_{{$sousintervention->id}}" aria-hidden="true" role="dialog">
+			@foreach($pieces as $spiece)
+			<div class="modal fade" id="edit_piece_{{$piece->id}}" aria-hidden="true" role="dialog">
 				<div class="modal-dialog modal-dialog-centered" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -629,4 +648,21 @@
 				$('#pieces-table').DataTable();
             });
         </script>
+		<script> 
+			function getEquipements(clientId) {
+				fetch('/getEquipements?client_id=' + clientId)
+					.then(response => response.json())
+					.then(data => {
+						const equipementSelect = document.getElementById('equipement');
+						equipementSelect.innerHTML = '<option value="">Selectionner Equipement</option>';
+						data.forEach(equipement => {
+							const option = document.createElement('option');
+							option.value = equipement.id;
+							option.text = equipement.modele + " - " + equipement.numserie;
+							equipementSelect.appendChild(option);
+						});
+					})
+					.catch(error => console.error('Error fetching equipements:', error));
+			}
+		</script>
     @endpush

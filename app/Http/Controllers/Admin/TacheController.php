@@ -50,7 +50,7 @@ class TacheController extends Controller
                 })
 
                 ->addColumn('action', function ($row) {
-                    $editbtn = '<a href="'.route("taches.edit", $row->id).'" class="editbtn"><button class="btn btn-primary"><i class="fas fa-edit"></i></button></a>';
+                    $editbtn = '<a href="'.route("taches.edit", $row->id).'" class="editbtn"><button class="btn btn-primary" title="Modifier"><i class="fas fa-edit"></i></button></a>';
                     $deletebtn = '<a data-id="'.$row->id.'" data-route="'.route('taches.destroy', $row->id).'" href="javascript:void(0)" id="deletebtn"><button class="btn btn-danger"><i class="fas fa-trash"></i></button></a>';
                     
                     if ($row->trashed()) {
@@ -119,11 +119,12 @@ class TacheController extends Controller
      * @param  \app\Models\Tache $tache
      * @return \Illuminate\Http\Response
      */
-    public function edit(tache $tache)
+    public function edit(Tache $tach)
     {
         $title = 'edit tache';
+        $users = User::whereIn('role', ['technicien', 'ingenieur','administrateur'])->get();
         return view('admin.taches.edit',compact(
-            'title','tache'
+            'title','tach','users'
         ));
     }
 
@@ -131,22 +132,23 @@ class TacheController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \app\Models\tache $tache
+     * @param  \app\Models\Tache $tach
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, tache $tache)
+    public function update(Request $request,Tache $tach)
     {
         $this->validate($request,[
             'date'=>'required'
 
         ]);
 
-        $tache->update([
+        $tach->update([
             'date'=>$request->date,
-            'address'=>$request->address,
             'type'=>$request->type,
-            'phone'=>$request->phone,
-            'fax'=>$request->fax,
+            'fournisseur'=>$request->fournisseur,
+            'commentaire'=>$request->commentaire,
+            'user'=>$request->user,
+
         ]);
         $notification = notify("tache modifié avec succès");
         return redirect()->route('taches.index')->with($notification);
@@ -160,7 +162,7 @@ class TacheController extends Controller
      */
     public function destroy(Request $request)
     {
-        return tache::findOrFail($request->id)->delete();
+        return Tache::findOrFail($request->id)->delete();
     }
 
 }

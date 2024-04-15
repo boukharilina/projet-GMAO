@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Piece;
 use App\Models\Intervention;
 use App\Models\User;
-use Yajra\DataTables\DataTables;
+use App\Model\Equipement; 
+use App\Model\Client;
+use Yajra\DataTables\DataTables; 
 use Illuminate\Support\Facades\DB;
 use QCod\AppSettings\Setting\AppSettings;
 
@@ -54,7 +56,7 @@ class PieceController extends Controller
 
                     $btn = $editbtn.' '.$deletebtn;
                     return $btn;
-                })
+                }) 
                 ->rawColumns(['designation','action'])
                 ->make(true);
         }
@@ -71,9 +73,11 @@ class PieceController extends Controller
     public function create($intervention_id)
     {
         $title = 'Ajouter pièce';
+        $equipements= Equipement::get();
+        $clients = Client::get();
         $intervention = Intervention::with('pieces')->findOrFail($intervention_id);
         return view('admin.interventions.show',compact(
-            'title','intervention_id','intervention','users'
+            'title','intervention_id','intervention','users','equipements','clients'
         ));
     }
 
@@ -96,6 +100,8 @@ class PieceController extends Controller
             'date_remplacement'=>$request->date_remplacement,
             'qte'=>$request->qte,
             'intervention_id'=>$intervention_id,
+            'client_id'=>$request->client,
+            'equipement_id'=>$request->equipement,
 
 
         ]);
@@ -111,10 +117,10 @@ class PieceController extends Controller
      * @param  \app\Models\piece $piece
      * @return \Illuminate\Http\Response
      */
-    public function edit(piece $piece)
+    public function edit(Piece $piece)
     {
-        $title = 'edit piece';
-        $piece = piece::find($id);
+        $title = 'modifier pièce';
+        $piece = Piece::find($id);
         return view('admin.pieces.edit',compact(
             'title','piece','users'
         ));

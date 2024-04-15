@@ -196,7 +196,7 @@
 	<!-- Datetimepicker JS -->
 	<script src="{{asset('assets/js/moment.min.js')}}"></script>
 	<script src="{{asset('assets/js/bootstrap-datetimepicker.min.js')}}"></script>
-	<script>
+	<script> 
         function getEquipements(clientId) {
             fetch('/getEquipements?client_id=' + clientId)
                 .then(response => response.json())

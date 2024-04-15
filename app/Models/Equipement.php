@@ -41,4 +41,9 @@ class Equipement extends Model
     {
         return $this->hasOne(Contrat::class);
     }
+
+    public function pieces():HasMany
+    {
+        return $this->HasMany(Piece::class);
+    }
 }

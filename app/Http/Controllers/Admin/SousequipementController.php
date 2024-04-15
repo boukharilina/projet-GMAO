@@ -21,8 +21,8 @@ class SousequipementController extends Controller
      */
     public function index(Request $request)
     {
-        $title = 'sousequipements';
-        if($request->ajax()){
+        $title = 'Sousequipements';
+        if($request->ajax()){ 
             $sousequipements = Sousequipement::get();
             return DataTables::of($sousequipements)
                 ->addIndexColumn()

@@ -21,6 +21,8 @@ class CreatePiecesTable extends Migration
             $table->date('date_remplacement');
             $table->string('qte');
             $table->foreignId('intervention_id')->constrained()->onDelete('cascade');
+            $table->foreignId('equipement_id')->constrained()->onDelete('cascade');
+            $table->foreignId('client_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

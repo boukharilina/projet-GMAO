@@ -73,8 +73,8 @@
                                     <td>{{$equipement->date_installation}}</td>
                                     <td>{{$equipement->software}}</td>
                                     <td class="text-center">
-                                        <a href="{{route('equipements.show', $equipement->id)}}" class="btn btn-success btn-sm"><i class="fas fa-eye"></i></a>
                                         <a href="{{route('equipements.edit', $equipement->id)}}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
+                                        <a href="{{route('equipements.show', $equipement->id)}}" class="btn btn-success btn-sm"><i class="fas fa-eye"></i></a>      
                                     </td>
                                 </tr>
                                 @endforeach
@@ -148,8 +148,8 @@
                                         <td>{{date('d-m-Y h:m A', strtotime($intervention->appel_client))}}</td>
                                         <td>{{$intervention->etat}}</td>
                                         <td class="text-center">
-                                            <a href="{{route('interventions.show', $intervention->id)}}" class="btn btn-success btn-sm"><i class="fas fa-eye"></i></a>
                                             <a href="{{route('interventions.edit', $intervention->id)}}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
+                                            <a href="{{route('interventions.show', $intervention->id)}}" class="btn btn-success btn-sm"><i class="fas fa-eye"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach
