@@ -119,16 +119,9 @@ class TacheController extends Controller
      * @param  \app\Models\Tache $tache
      * @return \Illuminate\Http\Response
      */
-<<<<<<< HEAD
     public function edit(Tache $tache)
     {
         $title = 'modifier tâche';
-=======
-    public function edit(Tache $tach)
-    {
-        $title = 'edit tache';
-        $users = User::whereIn('role', ['technicien', 'ingenieur','administrateur'])->get();
->>>>>>> lina
         return view('admin.taches.edit',compact(
             'title','tach','users'
         ));
@@ -141,11 +134,7 @@ class TacheController extends Controller
      * @param  \app\Models\Tache $tach
      * @return \Illuminate\Http\Response
      */
-<<<<<<< HEAD
     public function update(Request $request, Tache $tache)
-=======
-    public function update(Request $request,Tache $tach)
->>>>>>> lina
     {
         $this->validate($request,[
             'date'=>'required'
@@ -158,10 +147,6 @@ class TacheController extends Controller
             'fournisseur'=>$request->fournisseur,
             'commentaire'=>$request->commentaire,
             'user'=>$request->user,
-<<<<<<< HEAD
-=======
-
->>>>>>> lina
         ]);
         $notification = notify("tâche modifié avec succès");
         return redirect()->route('taches.index')->with($notification);
