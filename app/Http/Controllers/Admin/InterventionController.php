@@ -182,15 +182,7 @@ class InterventionController extends Controller
      */
     public function update(Request $request, Intervention $intervention)
     {
-        $this->validate($request,[
-            'equipement'=>'required',
-            'client'=>'required',
-            'mode_appel'=>'required',
-            'appel_client'=>'required',
-            'sousequipement_id' => 'nullable|integer',
-            'soutraitant_id' => 'nullable|integer',
-
-        ]);
+     
         $rapportName = null;
         if($request->hasFile('rapport')){
             $rapportName = time().'.'.$request->rapport->extension();
@@ -199,7 +191,7 @@ class InterventionController extends Controller
         $intervention->update([
             'client_id'=>$request->client,
             'equipement_id'=>$request->equipement,
-            'sousequipement_id'=>$request->equipement,
+            'sousequipement_id'=>$request->sousequipement,
             'etat_initial'=>$request->etat_initial,
             'desciption_panne'=>$request->desciption_panne,
             'priorite'=>$request->priorite,
@@ -211,6 +203,8 @@ class InterventionController extends Controller
             'date_debut'=>$request->date_debut,
             'date_fin'=>$request->date_fin,
             'etat_final'=>$request->etat_final,
+            'date_fin_global'=>$request->date_fin_global,
+            'etat_final_global'=>$request->etat_final_global,
             'etat'=>$request->etat,
             'rapport'=>$rapportName,
         ]);
@@ -242,12 +236,13 @@ class InterventionController extends Controller
         $equipements= Equipement::get();
         $sousequipements= Sousequipement::get();
         $users= User::get();
+        $etats = Etat::get();
         $soustraitants = Soustraitant::get();
         $sousinterventions = $intervention->sousinterventions;
         $pieces = $intervention->pieces;
         return view('admin.interventions.show',compact(
             'title','clients','sousequipements','intervention',
-            'users','equipements','soustraitants','sousinterventions','pieces'
+            'users','equipements','soustraitants','sousinterventions','pieces','etats'
 
         ));
     }

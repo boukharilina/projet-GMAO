@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -20,5 +21,9 @@ class Sousequipement extends Model
     public function equipement()
     {
         return $this->belongsTo(Equipement::class, 'equipement_id');
+    }
+    public function pieces():HasMany
+    {
+        return $this->HasMany(Piece::class);
     }
 }

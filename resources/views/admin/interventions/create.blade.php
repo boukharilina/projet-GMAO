@@ -47,7 +47,7 @@
 									<option value="Sélectionner un equipement">Sélectionner un equipement</option>
 								</select>
 							</div>
-						</div>
+						</div>  
 
 							<div class="col-lg-4">
 								<div class="form-group">
@@ -197,7 +197,7 @@
 	<!-- Datetimepicker JS -->
 	<script src="{{asset('assets/js/moment.min.js')}}"></script>
 	<script src="{{asset('assets/js/bootstrap-datetimepicker.min.js')}}"></script>
-	<script>
+	<script> 
         function getEquipements(clientId) {
             fetch('/getEquipements?client_id=' + clientId)
                 .then(response => response.json())

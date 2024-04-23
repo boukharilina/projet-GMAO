@@ -15,26 +15,27 @@
 	<div class="col-md-12">
 		<div class="profile-header">
 
-				<div class="col ml-md-n2 profile-user-info">
-
-					<h4 class="user-name mb-3">Client : {{$intervention->client->name}}</h4>
-					<h5 class="user-name mb-3">Equipmement : {{$intervention->equipement->modele .'-'.$intervention->equipement->numserie}}</h5>
-                    <h5 class="user-name mb-3">Sous équipement:
-                                @if($intervention->sousequipement)
-                                {{$intervention->sousequipement->designation}}@endif
-                    </h5>
-					<h6 class="user-name mb-3">Etat : {{$intervention->etat}}</h6>
+				<div class="row">
+					<div class="col-sm-6 m-b-20">
+						<img alt="Logo" class="inv-logo img-fluid" src="/assets/img/logo.png ">
+					</div>
+					<div class="col-sm-6 m-b-20">
+						<h4 class="text-info"><strong>CLIENT : </strong>{{$intervention->client->name}}</h4>
+							<h5 class="text-black text-uppercase">Equipmement : {{$intervention->equipement->modele .'-'.$intervention->equipement->numserie}}</h5>
+							<h5 class="text-muted">Sous équipement :
+										@if($intervention->sousequipement)
+										{{$intervention->sousequipement->designation}}@endif
+							</h5>
 				</div>
 
-
-		</div>
-		<div class="profile-menu">
-			<ul class="nav nav-tabs nav-tabs-solid">
-				<li class="nav-item">
-					<a class="nav-link active" data-toggle="tab" href="#per_details_tab">Aperçu</a>
-				</li>
-			</ul>
-		</div>
+					<div class="col-sm-6 col-lg-7 col-xl-8 m-b-20">
+						<h6><strong>Détail</strong></h6>
+						<ul class="list-unstyled mb-0">
+							<li><h6 class="mb-0"><strong>Etat global : {{ $intervention->etat_final_global }}</strong></h6></li>
+							<li><h6 class="text-muted">Date de clotûre: {{ date('d-m-Y h:m a', strtotime($intervention->date_fin_global ))}}</h6></li>
+						</ul>
+					</div>
+				</div>
 
 		<div class="tab-content profile-tab-cont">
 
@@ -46,41 +47,51 @@
 					<div class="col-lg-12">
 						<div class="card">
 							<div class="card-body">
-								<h5 class="card-title d-flex justify-content-between">
-									<span>Aperçu</span>
-                                    @if(!auth()->user()->role === 'Super-admin')
+								<h4 class="card-title d-flex justify-content-between">
+									<span class="badge rounded-pill bg-info text-light">APERÇU</span>
+
 									<a class="edit-link" data-toggle="modal" href="#edit_intervention_details"><i class="fa fa-edit mr-1"></i>Modifier</a>
-                                  	@endif
+
                                     <a class="edit-link" data-toggle="modal" href="#ajout_sousintervention"><i class="fa fa-edit mr-1"></i>Ajouter sous-intervention</a>
 									<a class="edit-link" data-toggle="modal" href="#ajout_piece"><i class="fa fa-edit mr-1"></i>Ajouter pièce</a>
 									<span class="label label-primary"></span>
 
-								</h5>
+								</h4>
 
 
                                 <div class="row">
-									<p class="col-sm-2 text-muted text-sm-right mv-0 mb-sm-3">État initial d'équipement</p>
-									<p class="col-sm-10">	{{$intervention->etat_initial}}</p>
+									<p class="col-sm-E text-muted text-sm-right mv-0 mb-sm-2">Équipement avant visite :</p>
+									<p class="col-sm-9">{{$intervention->etat_initial}}</p>
 								</div>
 
 								<div class="row">
-									<p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">Description de la Panne</p>
-									<p class="col-sm-10">{{$intervention->description_panne}}</p>
-								</div>
-
-                                <div class="row">
-									<p class="col-sm-2 text-muted text-sm-right mv-0 mb-sm-3">Heure/Date d'appel client</p>
-									<p class="col-sm-10">{{date('d-m-Y h:m A', strtotime($intervention->appel_client))}}</p>
-								</div>
-
-                                <div class="row">
-									<p class="col-sm-2 text-muted text-sm-right mv-0 mb-sm-3">Mode d'appel client</p>
-									<p class="col-sm-10">	{{$intervention->mode_appel}}</p>
+									<p class="col-sm-E text-muted text-sm-right mb-0 mb-sm-2">Description de la Panne :</p>
+									<p class="col-sm-9">{{$intervention->description_panne}}</p>
 								</div>
 
 								<div class="row">
-									<p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">Intervenant(s)</p>
-									<p class="col-sm-10">
+									<p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">Etat intervention :</p>
+									<p class="col-sm-9">{{$intervention->etat}}</p>
+								</div>
+
+                                <div class="row">
+									<p class="col-sm-E text-muted text-sm-right mv-0 mb-sm-2">Heure/Date d'appel client :</p>
+									<p class="col-sm-9">{{date('d-m-Y h:m A', strtotime($intervention->appel_client))}}</p>
+								</div>
+
+                                <div class="row">
+									<p class="col-sm-2 text-muted text-sm-right mv-0 mb-sm-3">Mode d'appel client :</p>
+									<p class="col-sm-15">	{{$intervention->mode_appel}}</p>
+								</div>
+
+								<div class="row">
+									<p class="col-sm-2 text-muted text-sm-right mv-0 mb-sm-3">Priorité :</p>
+									<p class="col-sm-15">	{{$intervention->priorite}}</p>
+								</div>
+
+								<div class="row">
+									<p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">Intervenant(s) : </p>
+									<p class="col-sm-15">
                                         @if (is_array($intervention->destinateur))
                                         {{
                                            implode(', ', $intervention->destinateur)
@@ -90,35 +101,35 @@
 								</div>
 
                                 <div class="row">
-									<p class="col-sm-2 text-muted text-sm-right mv-0 mb-sm-3">Sous-traitant</p>
+									<p class="col-sm-2 text-muted text-sm-right mv-0 mb-sm-3">Sous-traitant :</p>
                                     @if($intervention->soustraitant)
-                                    <p class="col-sm-10">{{$intervention->soustraitant->name}}@endif</p>
+                                    <p class="col-sm-15">{{$intervention->soustraitant->name}}@endif</p>
 								</div>
 
                                 <div class="row">
-									<p class="col-sm-2 text-muted text-sm-right mv-0 mb-sm-3">Date/Heure de début</p>
-									<p class="col-sm-10">{{date('d-m-Y h:m A', strtotime($intervention->date_debut))}}</p>
+									<p class="col-sm-2 text-muted text-sm-right mv-0 mb-sm-3">Date/Heure de début :</p>
+									<p class="col-sm-15">{{date('d-m-Y h:m A', strtotime($intervention->date_debut))}}</p>
 								</div>
 
                                 <div class="row">
-									<p class="col-sm-2 text-muted text-sm-right mv-0 mb-sm-3">Date/Heure de fin</p>
-									<p class="col-sm-10">{{date('d-m-Y h:m A', strtotime($intervention->date_fin))}}</p>
+									<p class="col-sm-2 text-muted text-sm-right mv-0 mb-sm-3">Date/Heure de fin :</p>
+									<p class="col-sm-15">{{date('d-m-Y h:m A', strtotime($intervention->date_fin))}}</p>
 								</div>
 
                                 <div class="row">
-									<p class="col-sm-2 text-muted text-sm-right mv-0 mb-sm-3">Description de l'intervention</p>
-									<p class="col-sm-10">{{$intervention->description_intervention}}</p>
+									<p class="col-sm-E text-muted text-sm-right mv-0 mb-sm-2">Description intervention :</p>
+									<p class="col-sm-9">{{$intervention->description_intervention}}</p>
 								</div>
 
                                 <div class="row">
-									<p class="col-sm-2 text-muted text-sm-right mv-0 mb-sm-3">État final d'équipement</p>
-									<p class="col-sm-10">	{{$intervention->etat_final}}</p>
+									<p class="col-sm-E text-muted text-sm-right mv-0 mb-sm-2">Équipement après visite :</p>
+									<p class="col-sm-9">	{{$intervention->etat_final}}</p>
 								</div>
 
 
 
 							</div>
-                        <!-- Edit Details Modal -->
+                        <!-- Edit intervention-->
 						<div class="modal fade" id="edit_intervention_details" aria-hidden="true" role="dialog">
 							<div class="modal-dialog modal-dialog-centered" role="document">
 								<div class="modal-content">
@@ -136,7 +147,7 @@
 												<div class="col-12">
                                                     <div class="form-group">
                                                         <label>Client <span class="text-danger">*</span></label>
-                                                        <select class="select2 form-select form-control" name="client_id">
+                                                        <select class="select2 form-select form-control" name="client">
                                                             @foreach ($clients as $client)
                                                                 @if ($client->id == $intervention->client_id )
 
@@ -151,16 +162,31 @@
 												<div class="col-12">
                                                         <div class="form-group">
                                                             <label>Equipement<span class="text-danger">*</span></label>
-                                                            <select class="form-control" type="text" name="equipement_name">
-															@foreach ($equipements as $equipement)
-																@if ($equipement->modele.'--'.$equipement->numserie == $intervention->equipement_name)
-																	<option selected value="{{$equipement->modele.'--'.$equipement->numserie}}">{{$equipement->modele.'--'.$equipement->numserie }}</option>
-																@else
-																	<option value="{{$equipement->modele.'--'.$equipement->numserie}}">{{$equipement->modele.'--'.$equipement->numserie }}</option>
-																@endif
+                                                            <select class="form-control" type="text" name="equipement">
+																@foreach ($equipements as $equipement)
+																	<option value="{{ $equipement->id }}"
+																		{{ ($intervention->equipement_id ?? null) === $equipement->id ? 'selected' : '' }}>
+																		{{ $equipement->modele }}
+																	</option>
 																@endforeach
 															</select>
                                                         </div>
+												</div>
+
+												<div class="col-12">
+													<div class="form-group">
+														<label for="sousequipement">Sous equipement</label>
+														<select id="sousequipement" class="select2 form-select form-control" name="sousequipement">
+															<option value="Sélectionner un sous equipement">Sélectionner un sous equipement</option>
+															@foreach ($sousequipements as $sousequipement)
+																<option value="{{ $sousequipement->id }}"
+																	{{ ($intervention->sousequipement_id ?? null) === $sousequipement->id ? 'selected' : '' }}>
+																	{{ $sousequipement->designation }}
+																</option>
+															@endforeach
+
+														</select>
+														</div>
 												</div>
 
 												<div class="col-12">
@@ -172,10 +198,222 @@
 
 												<div class="col-12">
 													<div class="form-group">
+														<label>Mode d'appel client<span class="text-danger">*</span></label>
+														<select  class="select2 form-select form-control" name="mode_appel">
+															@if ( $intervention->mode_appel == "Mail")
+
+															<option selected value='Mail'>Mail</option>
+															<option value="Téléphone">Téléphone</option>
+															<option value="Fax">Fax</option>
+															<option value="WhatsApp">WhatsApp</option>
+
+															@elseif ($intervention->mode_appel == "Téléphone")
+
+															<option selected value='Téléphone'>Téléphone</option>
+															<option value='Mail'>Mail</option>
+															<option value="Fax">Fax</option>
+															<option value="WhatsApp">WhatsApp</option>
+
+															@elseif ($intervention->mode_appel == "WhatsApp")
+															<option selected value='WhatsApp'>WhatsApp</option>
+															<option value="Mail">Mail</option>
+															<option value="Téléphone">Téléphone</option>
+															<option value="WhatsApp">WhatsApp</option>
+
+															@else
+
+															<option selected value='Fax'>Fax</option>
+															<option value="Mail">Mail</option>
+															<option value="Téléphone">Téléphone</option>
+															<option value="WhatsApp">WhatsApp</option>
+															@endif
+														</select>
+													</div>
+												</div>
+
+												<div class="col-12">
+													<div class="form-group">
+														<label>Heure/Date d'appel client<span class="text-danger">*</span></label>
+														<input type="datetime-local" name="appel_client" class="form-control" value="{{$intervention->appel_client}}">
+													</div>
+												</div>
+
+												<div class="col-12">
+													<div class="form-group">
+														<label>Etat initial d'equipement<span class="text-danger">*</span></label>
+														<select  class="select2 form-select form-control" name="etat_initial">
+
+															@if ( $intervention->etat_initial == "Fonctionnel")
+
+															<option selected value='Fonctionnel'>Fonctionnel</option>
+															<option value="Partiellement Fonctionnel">Partiellement Fonctionnel</option>
+															<option value="Panne Intermittente">Panne Intermittente</option>
+															<option value="A l'arrêt">A l'arrêt</option>
+
+															@elseif ($intervention->etat_initial == "Partiellement Fonctionnel")
+
+															<option selected value='Partiellement Fonctionnel'>Partiellement Fonctionnel</option>
+															<option value='Fonctionnel'>Fonctionnel</option>
+															<option value="Panne Intermittente">Panne Intermittente</option>
+															<option value="A l'arrêt">A l'arrêt</option>
+
+															@elseif ($intervention->etat_initial == "Panne Intermittente")
+															<option selected value='Panne Intermittente'>Panne Intermittente</option>
+															<option value='Partiellement Fonctionnel'>Partiellement Fonctionnel</option>
+															<option value='Fonctionnel'>Fonctionnel</option>
+															<option value="A l'arrêt">A l'arrêt</option>
+
+															@else
+
+															<option selected value="A l'arrêt">A l'arrêt</option>
+															<option value='Panne Intermittente'>Panne Intermittente</option>
+															<option value='Partiellement Fonctionnel'>Partiellement Fonctionnel</option>
+															<option value='Fonctionnel'>Fonctionnel</option>
+															@endif
+														</select>
+													</div>
+												</div>
+
+												<div class="col-12">
+													<div class="form-group">
+														<label for="destinateur">Intervenant(s) <span class="text-danger">*</span></label>
+														<select class="select2 form-select form-control" name="destinateur[]" multiple>
+															@foreach($users as $user)
+																@if(in_array($user->name, $intervention->destinateur))
+																	<option selected value='{{ $user->name }}'>{{ $user->name }}</option>
+																@else
+																	<option value='{{ $user->name }}'>{{ $user->name }}</option>
+																@endif
+															@endforeach
+														</select>
+													</div>
+												</div>
+
+												<div class="col-12">
+													<div class="form-group">
 														<label>Date/Heure Début</label>
 														<input type="datetime-local" value="{{$intervention->date_debut}}" class="form-control" name="date_debut">
 													</div>
 												</div>
+
+												<div class="col-12">
+													<div class="form-group">
+														<label>Date/Heure Fin</label>
+														<input type="datetime-local" value="{{$intervention->date_fin}}" class="form-control" name="date_fin">
+													</div>
+												</div>
+
+												<div class="col-12">
+													<div class="form-group">
+														<label>Equipement après visite<span class="text-danger">*</span></label>
+															<select  class="select2 form-select form-control" name="etat_final">
+															@if ( $intervention->etat_final == "Fonctionnel")
+																<option selected value="Fonctionnel">Fonctionnel</option>
+																<option value="Partiellement Fonctionnel">Partiellement Fonctionnel</option>
+																<option value="Panne Intermittente">Panne Intermittente</option>
+																<option value="A l'arrêt">A l'arrêt</option>
+															@elseif ($intervention->etat_final == "Partiellement Fonctionnel")
+																<option selected value="Partiellement Fonctionnel">Partiellement Fonctionnel</option>
+																<option value="Fonctionnel">Fonctionnel</option>
+																<option value="Panne Intermittente">Panne Intermittente</option>
+																<option value="A l'arrêt">A l'arrêt</option>
+															@elseif ($intervention->etat_final == "Panne Intermittente")
+																<option selected value="Panne Intermittente">Panne Intermittente</option>
+																<option value="Fonctionnel">Fonctionnel</option>
+																<option value="Partiellement Fonctionnel">Partiellement Fonctionnel</option>
+																<option value="A l'arrêt">A l'arrêt</option>
+															@elseif ($intervention->etat_final == "A l'arrêt")
+																<option selected value="A l'arrêt">A l'arrêt</option>
+																<option value="Fonctionnel">Fonctionnel</option>
+																<option value="Partiellement Fonctionnel">Partiellement Fonctionnel</option>
+																<option value="Panne Intermittente">Panne Intermittente</option>
+															@else
+																<option> Sélectionner l'etat final de l'equipement</option>
+																<option value="Fonctionnel">Fonctionnel</option>
+																<option value="Partiellement Fonctionnel">Partiellement Fonctionnel</option>
+																<option value="Panne Intermittente">Panne Intermittente</option>
+																<option value="A l'arrêt">A l'arrêt</option>
+															@endif
+															</select>
+													</div>
+												</div>
+
+												<div class="col-12">
+													<div class="form-group">
+														<label>Etat intervention<span class="text-danger">*</span></label>
+														<select  class="select2 form-select form-control" name="etat">
+															<option >Sélectionner un état de l'intervention</option>
+																@foreach ($etats as $etat)
+																	<option @if($intervention->etat == $etat->name) selected @endif>{{ $etat->name }}</option>
+																@endforeach
+														</select>
+													</div>
+												</div>
+
+												<div class="col-12">
+													<div class="form-group">
+														<label>Priorité</label>
+														<select  class="select2 form-select form-control" name="priorite">
+
+														@if ( $intervention->priorite == "Tres urgent")
+															<option >Selectionner une priorité</option>
+															<option selected value='Tres urgent'>Tres urgent</option>
+															<option value="Urgent">Urgent</option>
+															<option value="Normale">Normale</option>
+
+														@elseif ($intervention->priorite == "Urgent")
+															<option selected value='Urgent'>Urgent</option>
+															<option value='Normale'>Normale</option>
+															<option value='Tres urgent'>Tres urgent</option>
+
+														@elseif ($intervention->priorite == "Normale")
+															<option selected value='Normale'>Normale</option>
+															<option value='Tres urgent'>Tres urgent</option>
+															<option value='Urgent'>Urgent</option>
+														@else
+															<option value='Normale'>Normale</option>
+															<option value='Tres urgent'>Tres urgent</option>
+															<option value='Urgent'>Urgent</option>
+														@endif
+														</select>
+													</div>
+												</div>
+
+												<div class="col-12">
+													<div class="form-group">
+														<label>Description de l'intervention</label>
+															<input type="textarea" name="description_intervention" class="form-control" placeholder="décrire l'intervention" value="{{$intervention->description_intervention ?? old('description_intervention')}}">
+													</div>
+												</div>
+
+												<div class="col-12">
+													<div class="form-group">
+														<label>Etat final global<span class="text-danger">*</span></label>
+														<select  class="select2 form-select form-control" name="etat_final_global">
+														   <option >Sélectionner un état</option>
+															@foreach($etats as $etat)
+																<option @if($intervention->etat == $etat->name) selected @endif>{{ $etat->name }}</option>
+															@endforeach
+
+														</select>
+													</div>
+												</div>
+
+												<div class="col-12">
+													<div class="form-group">
+														<label>Date/Heure de fin global</label>
+														<input type="datetime-local" value="{{$intervention->date_fin_global}}" class="form-control" name="date_fin_global">
+													</div>
+												</div>
+
+												<div class="col-12">
+													<div class="form-group">
+														<label>Rapport d'intervention</label>
+														<input type="file" class="form-control" name='rapport' value="{{$intervention->rapport ?? old('rapport')}}">
+													</div>
+												</div>
+
+
 
 											</div>
 											<button type="submit" class="btn btn-primary btn-block">Modifier</button>
@@ -184,7 +422,7 @@
 								</div>
 							</div>
 						</div>
-						<!-- /Edit Details Modal -->
+						<!-- /Edit intervention-->
 
 						<!-- Ajout sous intervention -->
 						<div class="modal fade" id="ajout_sousintervention" aria-hidden="true" role="dialog">
@@ -270,6 +508,33 @@
 											<div class="row form-row">
 												<div class="col-12">
                                                     <div class="form-group">
+                                                    <label>Client<span class="text-danger">*</span></label>
+														<select id="client" onchange="getEquipements(this.value)" class="select2 form-select form-control" name="client">
+															<option value="Sélectionner un Client">Sélectionner un Client</option>
+															@foreach ($clients as $client)
+																<option value="{{ $client->id }}">{{ $client->name }}</option>
+											   				@endforeach
+														</select>
+                                                    </div>
+												</div>
+												<div class="col-12">
+                                                    <div class="form-group">
+													<label for="equipement">Equipement<span class="text-danger">*</span></label>
+														<select id="equipement" onchange="getSousequipements(this.value)" class="select2 form-select form-control" name="equipement">
+															<option value="Sélectionner un equipement">Sélectionner un equipement</option>
+														</select>
+													</div>
+												</div>
+												<div class="col-12">
+                                                    <div class="form-group">
+													<label for="sousequipement">Sous-equipement<span class="text-danger">*</span></label>
+														<select id="sousequipement" class="select2 form-select form-control" name="sousequipement">
+															<option value="Sélectionner un equipement">Sélectionner un sous-equipement</option>
+														</select>
+													</div>
+												</div>
+												<div class="col-12">
+                                                    <div class="form-group">
                                                         <label>Désignation<span class="text-danger">*</span></label>
              											<input type="text" name="designation" class="form-control" placeholder="Saisir la désignation">
                                                     </div>
@@ -310,7 +575,6 @@
 						<!-- /Ajout pièce remplacée -->
 						</div>
 
-                    <!-- /Aperçu intervention -->
 
 					<!-- index Sous interventions -->
                     @if($intervention->sousinterventions->isEmpty())
@@ -320,7 +584,7 @@
                     @else
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="text-uppercase"><span class="badge rounded-pill bg-primary text-light">Historique des sous-interventions</span></h4>
+                                <h4 class="text-uppercase"><span class="badge rounded-pill bg-info text-light">Historique des sous-interventions</span></h4>
 									<div class="table-responsive">
 										<table id="sousinterventions-table" class="table table-bordered">
 											<thead>
@@ -370,7 +634,7 @@
 
 					<!-- /index Sous interventions -->
 
-					<!-- index pieces -->
+					<!-- index pièces de repmlacement-->
                     @if($intervention->pieces->isEmpty())
                         <div class="p-3 mb-2 bg-warning text-light">
                             <h6 class="text-center">Pas de pièces remplacées.</h6>
@@ -378,7 +642,7 @@
                     @else
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="text-uppercase"><span class="badge rounded-pill bg-primary text-light">Pièces remplacées</span></h4>
+                                <h4 class="text-uppercase"><span class="badge rounded-pill bg-info text-light">Pièces remplacées</span></h4>
 									<div class="table-responsive">
 										<table id="pieces-table" class="table table-bordered">
 											<thead>
@@ -400,7 +664,7 @@
                                                     <td>{{date('d-m-Y', strtotime($piece->date_remplacement))}}</td>
                                                     <td>{{$piece->qte}}</td>
                                                     <td>
-                                                        <!-- Bouton "Edit" -->
+                                                        <!-- Bouton "Edit" pour chaque sous-intervention -->
 														<a data-placement="top" title="Modifier" class='btn btn-info edit-link' data-toggle="modal" data-target="#edit_piece_{{$piece->id}}">
                                                             <i class="fas fa-edit"></i>
                                                         </a>
@@ -414,7 +678,7 @@
                                 </div>
                     @endif
 
-					<!-- /index Sous interventions -->
+					<!-- /index pièces remplacées -->
 
 					<!-- Edit Modal des sous-intervention -->
 					@foreach($sousinterventions as $sousintervention)
@@ -560,7 +824,7 @@
             </div>
 
 			<!-- Edit Modal pièce remplacée-->
-			@foreach($pieces as $piece)
+			@foreach($pieces as $spiece)
 			<div class="modal fade" id="edit_piece_{{$piece->id}}" aria-hidden="true" role="dialog">
 				<div class="modal-dialog modal-dialog-centered" role="document">
 					<div class="modal-content">
@@ -597,7 +861,7 @@
 
 								<div class="col-12">
 									<div class="form-group">
-										<label>Date de repmplacement</label>
+										<label>Date de remplacement</label>
 										<input class="form-control" type="date" name="date_remplacement" value="{{$piece->date_remplacement}}">
 									</div>
 								</div>
@@ -629,4 +893,56 @@
 				$('#pieces-table').DataTable();
             });
         </script>
+	<script>
+        function getEquipements(clientId) {
+            fetch('/getEquipements?client_id=' + clientId)
+                .then(response => response.json())
+                .then(data => {
+                    const equipementSelect = document.getElementById('equipement');
+                    equipementSelect.innerHTML = '<option value="">Select Equipement</option>';
+                    data.forEach(equipement => {
+                        const option = document.createElement('option');
+                        option.value = equipement.id;
+                        option.text = equipement.modele + " - " + equipement.numserie;
+                        equipementSelect.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching equipements:', error));
+        }
+    </script>
+		<script>
+			function getSousequipements(equipementId) {
+				fetch('/getSousequipements?equipement_id=' + equipementId)
+					.then(response => response.json())
+					.then(data => {
+						const sousequipementSelect = document.getElementById('sousequipement');
+						sousequipementSelect.innerHTML = '<option value="">Selectionner Sousequipement</option>';
+						data.forEach(sousequipement => {
+							const option = document.createElement('option');
+							option.value = sousequipement.id;
+							option.text = sousequipement.designation+ " - " + sousequipement.identifiant;
+							sousequipementSelect.appendChild(option);
+						});
+					})
+					.catch(error => console.error('Error fetching sousequipements:', error));
+			}
+		</script>
+		<script>
+			function getSousequipements(equipementId) {
+				fetch('/getSousequipements?equipement_id=' + equipementId)
+					.then(response => response.json())
+					.then(data => {
+						const sousequipementSelect = document.getElementById('sousequipement');
+						sousequipementSelect.innerHTML = '<option value="">Select Sousequipement</option>';
+						data.forEach(sousequipement => {
+							const option = document.createElement('option');
+							option.value = sousequipement.id;
+							option.text = sousequipement.designation;
+							sousequipementSelect.appendChild(option);
+						});
+					})
+					.catch(error => console.error('Error fetching sousequipements:', error));
+			}
+		</script>
+
     @endpush

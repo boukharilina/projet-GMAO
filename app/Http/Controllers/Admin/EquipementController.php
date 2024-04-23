@@ -7,6 +7,7 @@ use App\Models\Client;
 use App\Models\Modalite;
 use App\Models\Contrat;
 use App\Models\Sousequipement;
+use App\Models\Piece;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -227,12 +228,13 @@ class EquipementController extends Controller
     public function show($id){
         $title = 'equipement';
         $equipement = Equipement::findOrFail($id);
-        $clients = Client::get();
+        $clients = Client::get(); 
         $modalites = Modalite::get();
         $contrat = $equipement->contrat;
         $sousequipements = $equipement->sousequipements;
+        $pieces = $equipement->pieces;    
         return view('admin.equipements.show',compact(
-            'title','modalites','clients','equipement','contrat','sousequipements'
+            'title','modalites','clients','equipement','contrat','sousequipements','pieces'
         ));
     }
 
