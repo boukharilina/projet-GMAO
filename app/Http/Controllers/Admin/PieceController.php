@@ -75,9 +75,10 @@ class PieceController extends Controller
         $title = 'Ajouter pièce';
         $equipements= Equipement::get();
         $clients = Client::get();
+        $sousequipements = Sousequipement::get();
         $intervention = Intervention::with('pieces')->findOrFail($intervention_id);
         return view('admin.interventions.show',compact(
-            'title','intervention_id','intervention','users','equipements','clients'
+            'title','intervention_id','intervention','users','equipements','clients','sousequipements '
         ));
     }
 
@@ -102,6 +103,7 @@ class PieceController extends Controller
             'intervention_id'=>$intervention_id,
             'client_id'=>$request->client,
             'equipement_id'=>$request->equipement,
+            'sousequipement_id'=>$request->sousequipement,
 
 
         ]);

@@ -21,7 +21,7 @@ class Intervention extends Model
     protected $fillable = [
         'equipement_id','client_id','sousequipement_id','etat_initial','description_panne','priorite',
         'mode_appel','destinateur','soustritant_id','appel_client','description_intervention','observation','date_debut',
-        'date_fin','etat_final','etat','rapport'
+        'date_fin','etat_final','date_fin_global','etat_final_global','etat','rapport'
     ];
     public function client(){
 

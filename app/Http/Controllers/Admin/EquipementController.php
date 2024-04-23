@@ -230,11 +230,11 @@ class EquipementController extends Controller
     public function show($id){
         $title = 'equipement';
         $equipement = Equipement::findOrFail($id);
-        $clients = Client::get();
+        $clients = Client::get(); 
         $modalites = Modalite::get();
         $contrat = $equipement->contrat;
         $sousequipements = $equipement->sousequipements;
-        $pieces = $equipement->pieces;
+        $pieces = $equipement->pieces;    
         return view('admin.equipements.show',compact(
             'title','modalites','clients','equipement','contrat','sousequipements','pieces'
         ));

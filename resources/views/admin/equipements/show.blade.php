@@ -234,8 +234,9 @@
 
                 @endif
                 
-
-				<!-- Liste des pièces de remplacement -->
+              
+              
+                <!-- Liste des pièces de remplacement -->
                 @if($equipement->pieces->isEmpty())
                 <div class="p-3 mb-2 bg-danger text-light">
                      <p>Aucune pièce de rechange.</p>
@@ -247,7 +248,7 @@
                              <div class="table-responsive">
                                  <table id="equipement-pieces-table" class="table table-bordered">
                                      <thead>
-                                         <tr>
+                                         <tr class="text-uppercase">
 
                                              <th>Designation</th>
                                              <th>Référence/code</th>
@@ -259,6 +260,7 @@
                                      </thead>
                                      <tbody>
                                         @foreach ($pieces as $piece)
+                                       
                                         <tr>
                                             <td>{{$piece->designation}}</td>
                                             <td>{{$piece->reference}}</td>
@@ -266,15 +268,18 @@
 											<td>{{date('d-m-Y', strtotime($piece->date_remplacement))}}</td>
                                             <td>{{$piece->qte}}</td>
                                         </tr>
+                                                              
                                         @endforeach
                                      </tbody>
                                  </table>
                              </div>
+                    
                          </div>
                     </div>
 
                 @endif
                 </div>
+                    </div>
                  <!-- ajout pieces remplacées 
                 <div id="password_tab" class="tab-pane fade">
 
@@ -343,7 +348,7 @@
 
     <script>
         $(document).ready(function () {
-            $('#equipement-sousequipement-table').DataTable();
+            $('#equipement-pieces-table').DataTable();
 
         });
     </script>

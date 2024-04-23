@@ -12,7 +12,7 @@ class Piece extends Model
    
 
     protected $fillable = [
-        'designation','reference','numserie','date_remplacement','qte','intervention_id','equipement_id','client_id'
+        'designation','reference','numserie','date_remplacement','qte','intervention_id','equipement_id','client_id','sousequipement_id'
     ];
 
     public function intervention(){
@@ -28,6 +28,11 @@ class Piece extends Model
     public function client(){
 
         return $this->belongsTo(Client::class);
+    }
+
+    public function sousequipement(){
+
+        return $this->belongsTo(Sousequipement::class);
     }
 
 }

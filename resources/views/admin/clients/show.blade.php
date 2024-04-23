@@ -18,26 +18,21 @@
 @endpush
 
 @section('content')
-<div class="row">
-    <div class="col-sm-6 m-b-20">
-        <img alt="Logo" class="inv-logo img-fluid" src="/assets/img/logo.png ">
-    </div>
-    <div class="col-sm-6 m-b-20">
-        <div class="invoice-details">
-            <h3 class="text-uppercase">client : {{$client->name }}</h3>
-            <ul class="list-unstyled mb-0">
-                <li class="text-muted">Adresse : <span>{{ $client->adress }}</span></li>
-            </ul>
+    <div class="row">
+        <div class="col-sm-6 m-b-20">
+            <img alt="Logo" class="inv-logo img-fluid" src="/assets/img/logo.png ">
+        </div>
+        <div class="col-sm-6 m-b-20">      
+                <h3 class="text-uppercase">client : {{$client->name }}</h3>
+                <h6 class="text-muted"><strong align="right">Adresse: </strong><span>{{ $client->adress }}</span></h6>      
         </div>
     </div>
-</div>
 
     <div class="col-sm-6 col-lg-7 col-xl-8 m-b-20">
         <h6><strong>Contact</strong></h6>
         <ul class="list-unstyled mb-0">
             <li><h6 class="mb-0"><strong>Email : {{ $client->email }}</strong></h6></li>
-            <li><h6 class="text-muted">Tél : {{ $client->phone }}</h6></li>
-            
+            <li><h6 class="text-muted">Tél : {{ $client->phone }}</h6></li>       
         </ul>
     </div>
     

@@ -47,7 +47,7 @@
 									<option value="Sélectionner un equipement">Sélectionner un equipement</option>
 								</select>
 							</div>
-						</div>
+						</div>  
 
 						<div class="col-lg-4">
 							<div class="form-group">
