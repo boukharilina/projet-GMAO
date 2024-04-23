@@ -134,7 +134,7 @@
                                         <option value="Fax">Fax</option>
                                         <option value="WhatsApp">WhatsApp</option>
 
-										@elseif ($intervention->mode_appel == "Téléphone")
+										@elseif ($intervention->mode_appel == "Téléphone") 
 
 										<option selected value='Téléphone'>Téléphone</option>
 										<option value='Mail'>Mail</option>
@@ -341,7 +341,7 @@
                     data.forEach(equipement => {
                         const option = document.createElement('option');
                         option.value = equipement.id;
-                        option.text = equipement.modele + " - " + equipement.numero_serie;
+                        option.text = equipement.modele + " - " + equipement.numserie;
                         equipementSelect.appendChild(option);
                     });
                 })

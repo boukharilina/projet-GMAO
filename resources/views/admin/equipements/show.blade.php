@@ -196,7 +196,7 @@
 						<!-- /Edit Details Modal -->
 						</div>
 
-                 <!-- Liste des sous equipements -->
+                <!-- Liste des sous equipements -->
                 @if($equipement->sousequipements->isEmpty())
                 <div class="p-3 mb-2 bg-danger text-light">
                      <p>Pas de sous-équipements.</p>
@@ -233,8 +233,54 @@
                     </div>
 
                 @endif
+                
+              
+              
+                <!-- Liste des pièces de remplacement -->
+                @if($equipement->pieces->isEmpty())
+                <div class="p-3 mb-2 bg-danger text-light">
+                     <p>Aucune pièce de rechange.</p>
                 </div>
-                 <!-- Change Password Tab -->
+                @else
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="text-uppercase"><span class="badge rounded-pill bg-primary-light text-light">Liste des pièces de rechange</span></h3>
+                             <div class="table-responsive">
+                                 <table id="equipement-pieces-table" class="table table-bordered">
+                                     <thead>
+                                         <tr class="text-uppercase">
+
+                                             <th>Designation</th>
+                                             <th>Référence/code</th>
+                                             <th>Numéro de série</th>
+											 <th>Date remplacement</th>
+                                             <th>Quantité</th>
+
+                                         </tr>
+                                     </thead>
+                                     <tbody>
+                                        @foreach ($pieces as $piece)
+                                       
+                                        <tr>
+                                            <td>{{$piece->designation}}</td>
+                                            <td>{{$piece->reference}}</td>
+                                            <td>{{$piece->numserie}}</td>
+											<td>{{date('d-m-Y', strtotime($piece->date_remplacement))}}</td>
+                                            <td>{{$piece->qte}}</td>
+                                        </tr>
+                                                              
+                                        @endforeach
+                                     </tbody>
+                                 </table>
+                             </div>
+                    
+                         </div>
+                    </div>
+
+                @endif
+                </div>
+                    </div>
+                 <!-- ajout pieces remplacées 
                 <div id="password_tab" class="tab-pane fade">
 
                     <div class="card">
@@ -287,7 +333,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- /Change Password Tab -->
+			</ajout pieces rmeplacées-->
 
 
 
@@ -302,7 +348,7 @@
 
     <script>
         $(document).ready(function () {
-            $('#equipement-sousequipement-table').DataTable();
+            $('#equipement-pieces-table').DataTable();
 
         });
     </script>

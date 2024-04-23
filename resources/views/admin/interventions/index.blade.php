@@ -33,6 +33,7 @@
 							    <th>ETAT</th>
 								<th>CLIENT</th>
 								<th>EQUIPEMENT</th>
+                                <th>sous-equipement</th>
 								<th>EQUIPEMENT AVENT VISITE</th>
 								<th>INTERVENANT(s)</th>
                                 <th>SOUS-TRAITANT</th>
@@ -83,6 +84,7 @@
 				{data: 'etat', name: 'etat'},
                 {data: 'client', name: 'client'},
                 {data: 'equipement', name: 'equipement'},
+                {data: 'sousequipement', name: 'sousequipement'},
                 {data: 'etat_initial', name: 'etat_initial'},
                 {data: 'destinateur', name: 'destinateur'},
                 {data: 'soustraitant', name: 'soustraitant'},
