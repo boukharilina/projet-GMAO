@@ -370,7 +370,7 @@
 
 					<!-- /index Sous interventions -->
 
-					<!-- index Sous interventions -->
+					<!-- index pieces -->
                     @if($intervention->pieces->isEmpty())
                         <div class="p-3 mb-2 bg-warning text-light">
                             <h6 class="text-center">Pas de pièces remplacées.</h6>
@@ -400,8 +400,8 @@
                                                     <td>{{date('d-m-Y', strtotime($piece->date_remplacement))}}</td>
                                                     <td>{{$piece->qte}}</td>
                                                     <td>
-                                                        <!-- Bouton "Edit" pour chaque sous-intervention -->
-														<a data-placement="top" title="Modifier" class='btn btn-info edit-link' data-toggle="modal" data-target="#edit_piece_{{$sousintervention->id}}">
+                                                        <!-- Bouton "Edit" -->
+														<a data-placement="top" title="Modifier" class='btn btn-info edit-link' data-toggle="modal" data-target="#edit_piece_{{$piece->id}}">
                                                             <i class="fas fa-edit"></i>
                                                         </a>
                                                     </td>
@@ -560,12 +560,12 @@
             </div>
 
 			<!-- Edit Modal pièce remplacée-->
-			@foreach($sousinterventions as $sousintervention)
-			<div class="modal fade" id="edit_piece_{{$sousintervention->id}}" aria-hidden="true" role="dialog">
+			@foreach($pieces as $piece)
+			<div class="modal fade" id="edit_piece_{{$piece->id}}" aria-hidden="true" role="dialog">
 				<div class="modal-dialog modal-dialog-centered" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title">Modifier pièce remplacée</h5>
+							<h5 class="modal-title">Modifier la pièce remplacée</h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -597,8 +597,8 @@
 
 								<div class="col-12">
 									<div class="form-group">
-										<label>Intervenant(s)</label>
-										<input class="form-control" type="date" name="date_remplacement" value="{{$piece->date_remplacement}}">			
+										<label>Date de repmplacement</label>
+										<input class="form-control" type="date" name="date_remplacement" value="{{$piece->date_remplacement}}">
 									</div>
 								</div>
 

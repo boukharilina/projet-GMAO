@@ -119,8 +119,6 @@ class EquipementController extends Controller
             'numserie'=>'required',
             'modalite_id'=>'required',
             'client_id'=>'required',
-            'software'=>'required',
-            'date_installation'=>'required',
             'plan_prev'=>'required',
 
         ]);
@@ -174,7 +172,7 @@ class EquipementController extends Controller
      */
     public function update(Request $request, Equipement $equipement)
     {
-        
+
         $documentName = $equipement->document;
         if($request->hasFile('document')){
             $documentName = time().'.'.$request->document->extension();

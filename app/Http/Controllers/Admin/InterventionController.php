@@ -335,7 +335,7 @@ class InterventionController extends Controller
         ));
     }
 
-    public function unclosed(Request $request)
+    public function unclosed(Request $request) 
     {
         $title = 'interventions Non Clôturés';
         if($request->ajax()){

@@ -49,7 +49,7 @@ class DashboardController extends Controller
                 ->options([]);
 
         $contrats_encours = Contrat::whereIn('status', ['En cours'])->count();
-        $contrats_expire = Contrat::whereNotIn('status', ['En cours'])->count();
+        $contrats_procheexpire = Contrat::whereIn('status', ['Proche expiration'])->count();
         $pieChart_contrats = app()->chartjs
         ->name('pieChart_contrats')
         ->type('pie')
@@ -59,7 +59,7 @@ class DashboardController extends Controller
             [
                 'backgroundColor' => ['#7bb13c', '#36A2EB'],
                 'hoverBackgroundColor' => ['#7bb13c', '#36A2EB'],
-                'data' => [$contrats_encours, $contrats_expire]
+                'data' => [$contrats_encours, $contrats_procheexpire]
             ]
             ])
             ->options([]);

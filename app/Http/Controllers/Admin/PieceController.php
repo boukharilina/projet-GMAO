@@ -108,13 +108,13 @@ class PieceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \app\Models\piece $piece
+     * @param  \app\Models\Piece $piece
      * @return \Illuminate\Http\Response
      */
-    public function edit(piece $piece)
+    public function edit(Piece $piece)
     {
         $title = 'edit piece';
-        $piece = piece::find($id);
+        $piece = Piece::find($id);
         return view('admin.pieces.edit',compact(
             'title','piece','users'
         ));
@@ -134,7 +134,7 @@ class PieceController extends Controller
             'designation'=>'required',
             'date_remplacement'=>'required',
         ]);
-       
+
         $piece->update([
             'designation'=>$request->designation,
             'reference'=>$request->reference,

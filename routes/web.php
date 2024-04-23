@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\ContratController;
 use App\Http\Controllers\Admin\SoustraitantController;
 use App\Http\Controllers\Admin\SousinterventionController;
 use App\Http\Controllers\Admin\TacheController;
+use App\Http\Controllers\Admin\PieceController;
 use App\Http\livewire\Calendar ;
 
 /*
@@ -54,6 +55,9 @@ Route::middleware(['auth'])->group(function(){
 
     Route::get('interventions/reports',[InterventionController::class,'reports'])->name('interventions.report');
     Route::post('interventions/reports',[InterventionController::class,'generateReport']);
+    
+    /*taches routes*/
+    Route::resource('taches',TacheController::class);
 
    /*equipments routes*/
     Route::get('equipements/reports',[EquipementController::class,'reports'])->name('equipements.report');
@@ -81,9 +85,8 @@ Route::middleware(['auth'])->group(function(){
 
     /*clients routes*/
     Route::resource('clients',ClientController::class);
- 
-    /*taches routes*/
-    Route::resource('taches',TacheController::class);
+
+
 
     /*backup routes*/
     Route::get('backup', [BackupController::class,'index'])->name('backup.index');

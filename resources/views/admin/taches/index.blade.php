@@ -3,7 +3,7 @@
 <x-assets.datatables />
 
 @push('page-css')
-    
+
 @endpush
 
 @push('page-header')
@@ -22,8 +22,8 @@
 @section('content')
 <div class="row">
 	<div class="col-md-12">
-	
-		<!-- Suppliers -->
+
+		<!-- taches -->
 		<div class="card">
 			<div class="card-body">
 				<div class="table-responsive">
@@ -39,18 +39,18 @@
 							</tr>
 						</thead>
 						<tbody>
-							
+
 						</tbody>
 					</table>
 				</div>
 			</div>
 		</div>
 		<!-- /taches-->
-		
+
 	</div>
 </div>
 
-@endsection	
+@endsection
 
 @push('page-js')
 <script>
@@ -68,7 +68,7 @@
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]
         });
-        
+
     });
-</script> 
+</script>
 @endpush
