@@ -149,10 +149,10 @@ class TacheController extends Controller
             'commentaire'=>$request->commentaire,
             'user'=>$request->user,
 
+
         ]);
         $notification = notify("tache modifié avec succès");
         return redirect()->route('taches.index')->with($notification);
-    }
 
     /**
      * Remove the specified resource from storage.

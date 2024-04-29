@@ -369,7 +369,6 @@
 				.catch(error => console.error('Error fetching equipements:', error));
 		}
 	</script>
-
 	<script>
 		function getSousequipements(equipementId) {
 			fetch('/getSousequipements?equipement_id=' + equipementId)
@@ -387,5 +386,4 @@
 				.catch(error => console.error('Error fetching sousequipements:', error));
 		}
 	</script>
-
 @endpush
