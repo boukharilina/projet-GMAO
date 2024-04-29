@@ -10,11 +10,13 @@ use App\Models\User;
 use App\Models\Etat;
 use App\Models\Soustraitant;
 use App\Models\Sousintervention;
+use App\Models\Piece;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 use QCod\AppSettings\Setting\AppSettings;
+use Carbon\Carbon;
 
 class InterventionController extends Controller
 {
@@ -53,21 +55,11 @@ class InterventionController extends Controller
                     }
                     return $intervention->destinateur;
                 })
-                ->addColumn('soustraitant',function($intervention){
-                    if(!empty($intervention->soustraitant)){
-                        return $intervention->soustraitant->name;
-                    }
+                ->addColumn('date_debut',function($intervention){
+                    return $intervention->date_debut;
                 })
-                ->addColumn('sousequipement',function($intervention){
-                    if(!empty($intervention->sousequipement)){
-                        return $intervention->sousequipement->designation;
-                    }
-                })
-                ->addColumn('appel_client',function($intervention){
-                    return $intervention->appel_client;
-                })
-                ->addColumn('type_intervention',function($intervention){
-                    return $intervention->type_intervention;
+                ->addColumn('etat_final',function($intervention){
+                    return $intervention->etat_final;
                 })
                 ->addColumn('action', function ($row) {
                     $editbtn = '<a href="'.route("interventions.edit", $row->id).'" class="editbtn"><button class="btn btn-primary" title="Modifier"><i class="fas fa-edit"></i></button></a>';
@@ -158,7 +150,7 @@ class InterventionController extends Controller
      *
      * @param  \app\Models\Intervention $purchase
      * @return \Illuminate\Http\Response
-     */
+     */ 
     public function edit(Intervention $intervention)
     {
         $title = 'modifier intervention';
@@ -191,7 +183,7 @@ class InterventionController extends Controller
         $intervention->update([
             'client_id'=>$request->client,
             'equipement_id'=>$request->equipement,
-            'sousequipement_id'=>$request->sousequipement,
+            'sousequipement_id'=>$request->equipement,
             'etat_initial'=>$request->etat_initial,
             'desciption_panne'=>$request->desciption_panne,
             'priorite'=>$request->priorite,
@@ -209,7 +201,8 @@ class InterventionController extends Controller
             'rapport'=>$rapportName,
         ]);
         $notifications = notify("Intervention modifiée avec succès");
-        return redirect()->route('interventions.index')->with($notifications);
+        return redirect()->route('interventions.show', $intervention->id)->with($notifications);
+
     }
 
     public function reports(){
@@ -243,8 +236,12 @@ class InterventionController extends Controller
         return view('admin.interventions.show',compact(
             'title','clients','sousequipements','intervention',
             'users','equipements','soustraitants','sousinterventions','pieces','etats'
+        
 
         ));
+        return Carbon::createFromTimeStamp($date_fin_global)->toDateString();
+
+ 
     }
 
     /**
