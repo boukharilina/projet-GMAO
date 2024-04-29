@@ -119,10 +119,8 @@ class TacheController extends Controller
      * @param  \app\Models\Tache $tache
      * @return \Illuminate\Http\Response
      */
-
     public function edit(Tache $tach)
     {
-        $title = 'modifier tâche';
         $title = 'edit tache';
         $users = User::whereIn('role', ['technicien', 'ingenieur','administrateur'])->get();
         return view('admin.taches.edit',compact(
@@ -134,7 +132,6 @@ class TacheController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \app\Models\Tache $tach
      * @param  \app\Models\Tache $tach
      * @return \Illuminate\Http\Response
      */
@@ -156,6 +153,7 @@ class TacheController extends Controller
         $notification = notify("tache modifié avec succès");
         return redirect()->route('taches.index')->with($notification);
     }
+
     /**
      * Remove the specified resource from storage.
      *

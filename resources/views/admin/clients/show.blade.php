@@ -22,9 +22,9 @@
         <div class="col-sm-6 m-b-20">
             <img alt="Logo" class="inv-logo img-fluid" src="/assets/img/logo.png ">
         </div>
-        <div class="col-sm-6 m-b-20">      
+        <div class="col-sm-6 m-b-20">
                 <h3 class="text-uppercase">client : {{$client->name }}</h3>
-                <h6 class="text-muted"><strong align="right">Adresse: </strong><span>{{ $client->adress }}</span></h6>      
+                <h6 class="text-muted"><strong align="right">Adresse: </strong><span>{{ $client->adress }}</span></h6>
         </div>
     </div>
 
@@ -32,10 +32,10 @@
         <h6><strong>Contact</strong></h6>
         <ul class="list-unstyled mb-0">
             <li><h6 class="mb-0"><strong>Email : {{ $client->email }}</strong></h6></li>
-            <li><h6 class="text-muted">Tél : {{ $client->phone }}</h6></li>       
+            <li><h6 class="text-muted">Tél : {{ $client->phone }}</h6></li>
         </ul>
     </div>
-    
+
 
 
             <!-- Equipements table -->
@@ -65,11 +65,11 @@
                                     <td>{{$equipement->designation}}</td>
                                     <td>{{$equipement->modele}}</td>
                                     <td>{{$equipement->numserie}}</td>
-                                    <td>{{$equipement->date_installation}}</td>
+                                    <td>{{!empty($equipement->date_installation) ? date('d-M-Y', strtotime($equipement->date_installation)) : null}}</td>
                                     <td>{{$equipement->software}}</td>
                                     <td class="text-center">
                                         <a href="{{route('equipements.edit', $equipement->id)}}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
-                                        <a href="{{route('equipements.show', $equipement->id)}}" class="btn btn-success btn-sm"><i class="fas fa-eye"></i></a>      
+                                        <a href="{{route('equipements.show', $equipement->id)}}" class="btn btn-success btn-sm"><i class="fas fa-eye"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach

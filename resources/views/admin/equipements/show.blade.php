@@ -19,7 +19,6 @@
 				<div class="col ml-md-n2 profile-user-info">
 					<h4 class="user-name mb-0">Modèle : {{$equipement->modele}}</h4>
                     <h5 class="user-name mb-0">Marque : {{$equipement->marque}}</h5>
-					<h6 class="text-muted">{{$equipement->code}}</h6>
 				</div>
 
 			</div>
@@ -72,7 +71,7 @@
 
                                 <div class="row">
 									<p class="col-sm-2 text-muted text-sm-right mv-0 mb-sm-3">Date Installation</p>
-									<p class="col-sm-10">{{date('d-m-Y', strtotime($equipement->date_installation))}}</p>
+									<p class="col-sm-10">{{!empty($equipement->date_installation) ? date('d-M-Y', strtotime($equipement->date_installation)) : null}}</p>
 								</div>
 
                                 <div class="row">
@@ -233,9 +232,9 @@
                     </div>
 
                 @endif
-                
-              
-              
+
+
+
                 <!-- Liste des pièces de remplacement -->
                 @if($equipement->pieces->isEmpty())
                 <div class="p-3 mb-2 bg-danger text-light">
@@ -260,7 +259,7 @@
                                      </thead>
                                      <tbody>
                                         @foreach ($pieces as $piece)
-                                       
+
                                         <tr>
                                             <td>{{$piece->designation}}</td>
                                             <td>{{$piece->reference}}</td>
@@ -268,19 +267,19 @@
 											<td>{{date('d-m-Y', strtotime($piece->date_remplacement))}}</td>
                                             <td>{{$piece->qte}}</td>
                                         </tr>
-                                                              
+
                                         @endforeach
                                      </tbody>
                                  </table>
                              </div>
-                    
+
                          </div>
                     </div>
 
                 @endif
                 </div>
                     </div>
-                 <!-- ajout pieces remplacées 
+                 <!-- ajout pieces remplacées
                 <div id="password_tab" class="tab-pane fade">
 
                     <div class="card">

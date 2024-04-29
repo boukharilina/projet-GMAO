@@ -120,7 +120,6 @@ class PieceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Piece $piece)
-    public function edit(Piece $piece)
     {
         $title = 'edit piece';
         $piece = Piece::find($id);

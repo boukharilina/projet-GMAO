@@ -22,11 +22,6 @@
 
 			<!-- Edit client -->
 			<form method="post" enctype="multipart/form-data" action="{{route('taches.update',$tach)}}">
-<<<<<<< HEAD
-			<form method="post" enctype="multipart/form-data" action="{{route('taches.update',$tache)}}">
-=======
-			<form method="post" enctype="multipart/form-data" action="{{route('taches.update',$tach)}}">
->>>>>>> lina
 				@csrf
 				@method("PUT")
 				<div class="service-fields mb-3">

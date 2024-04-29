@@ -53,7 +53,6 @@
 											{{ $equipement->modele }}
 										</option>
 									    @endforeach
-
 								    </select>
 								</div>
 							</div>
@@ -134,7 +133,7 @@
                                         <option value="Fax">Fax</option>
                                         <option value="WhatsApp">WhatsApp</option>
 
-										@elseif ($intervention->mode_appel == "Téléphone") 
+										@elseif ($intervention->mode_appel == "Téléphone")
 
 										<option selected value='Téléphone'>Téléphone</option>
 										<option value='Mail'>Mail</option>
@@ -271,20 +270,20 @@
 									<label>Priorité</label>
 									<select  class="select2 form-select form-control" name="priorite">
 
-									@if ( $intervention->priorite == "Très urgent")
+									@if ( $intervention->priorite == "Tres urgent")
 										<option >Selectionner une priorité</option>
-										<option selected value='Très urgent'>Tres urgent</option>
+										<option selected value='Tres urgent'>Tres urgent</option>
 										<option value="Urgent">Urgent</option>
 										<option value="Normale">Normale</option>
 
 									@elseif ($intervention->priorite == "Urgent")
 										<option selected value='Urgent'>Urgent</option>
 										<option value='Normale'>Normale</option>
-										<option value='Très urgent'>Tres urgent</option>
+										<option value='Tres urgent'>Tres urgent</option>
 
 									@elseif ($intervention->priorite == "Normale")
 										<option selected value='Normale'>Normale</option>
-										<option value='Très urgent'>Tres urgent</option>
+										<option value='Tres urgent'>Tres urgent</option>
 										<option value='Urgent'>Urgent</option>
                                     @else
                                         <option value='Normale'>Normale</option>
@@ -304,6 +303,28 @@
 
 						<div class="service-fields mb-3">
 							<div class="row">
+								<div class="col-lg-6">
+									<div class="form-group">
+										<label>Etat intervention global</label>
+										<select  class="select2 form-select form-control" name="etat_final_global">
+											<option >Sélectionner l'état global de l'intervention</option>
+												@foreach ($etats as $etat)
+													<option @if($intervention->etat == $etat->name) selected @endif>{{ $etat->name }}</option>
+												@endforeach
+										</select>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<label>Date/Heure de fin global</label>
+										<input type="datetime-local" value="{{$intervention->date_fin_global}}" class="form-control" name="date_fin_global">
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="service-fields mb-3">
+							<div class="row">
 								<div class="col-12">
 									<label>Rapport d'intervention</label>
 									<input type="file" class="form-control" name='rapport' value="{{$intervention->rapport ?? old('rapport')}}">
@@ -315,7 +336,7 @@
 
 
 					<div class="submit-section">
-                        <a href="{{route('interventions.index')}}" class="btn btn-danger submit-btn">Annuler</a>
+                        <a href="{{route('interventions.show', $intervention->id)}}" class="btn btn-danger submit-btn">Annuler</a>
 						<button class="btn btn-primary submit-btn" type="submit" >Modifier</button>
 					</div>
 				</form>
@@ -332,37 +353,39 @@
 	<script src="{{asset('assets/js/moment.min.js')}}"></script>
 	<script src="{{asset('assets/js/bootstrap-datetimepicker.min.js')}}"></script>
 	<script>
-        function getEquipements(clientId) {
-            fetch('/getEquipements?client_id=' + clientId)
-                .then(response => response.json())
-                .then(data => {
-                    const equipementSelect = document.getElementById('equipement');
-                    equipementSelect.innerHTML = '<option value="">Select Equipement</option>';
-                    data.forEach(equipement => {
-                        const option = document.createElement('option');
-                        option.value = equipement.id;
-                        option.text = equipement.modele + " - " + equipement.numserie;
-                        equipementSelect.appendChild(option);
-                    });
-                })
-                .catch(error => console.error('Error fetching equipements:', error));
-        }
-    </script>
+		function getEquipements(clientId) {
+			fetch('/getEquipements?client_id=' + clientId)
+				.then(response => response.json())
+				.then(data => {
+					const equipementSelect = document.getElementById('equipement');
+					equipementSelect.innerHTML = '<option value="">Selectionner Equipement</option>';
+					data.forEach(equipement => {
+						const option = document.createElement('option');
+						option.value = equipement.id;
+						option.text = equipement.modele + " - " + equipement.numserie;
+						equipementSelect.appendChild(option);
+					});
+				})
+				.catch(error => console.error('Error fetching equipements:', error));
+		}
+	</script>
+
 	<script>
-        function getSousequipements(equipementId) {
-            fetch('/getSousequipements?equipement_id=' + equipementId)
-                .then(response => response.json())
-                .then(data => {
-                    const sousequipementSelect = document.getElementById('sousequipement');
-                    sousequipementSelect.innerHTML = '<option value="">Select Sousequipement</option>';
-                    data.forEach(sousequipement => {
-                        const option = document.createElement('option');
-                        option.value = sousequipement.id;
-                        option.text = sousequipement.designation;
-                        sousequipementSelect.appendChild(option);
-                    });
-                })
-                .catch(error => console.error('Error fetching sousequipements:', error));
-        }
-    </script>
+		function getSousequipements(equipementId) {
+			fetch('/getSousequipements?equipement_id=' + equipementId)
+				.then(response => response.json())
+				.then(data => {
+					const sousequipementSelect = document.getElementById('sousequipement');
+					sousequipementSelect.innerHTML = '<option value="">Selectionner Sousequipement</option>';
+					data.forEach(sousequipement => {
+						const option = document.createElement('option');
+						option.value = sousequipement.id;
+						option.text = sousequipement.designation;
+						sousequipementSelect.appendChild(option);
+					});
+				})
+				.catch(error => console.error('Error fetching sousequipements:', error));
+		}
+	</script>
+
 @endpush
