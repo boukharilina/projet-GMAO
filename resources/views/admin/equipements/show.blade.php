@@ -72,7 +72,7 @@
 
                                 <div class="row">
 									<p class="col-sm-2 text-muted text-sm-right mv-0 mb-sm-3">Date Installation</p>
-									<p class="col-sm-10">{{date('d-m-Y', strtotime($equipement->date_installation))}}</p>
+									<p class="col-sm-10">{{!empty($equipement->date_installation) ? date('d-M-Y', strtotime($equipement->date_installation)) : null}}</p>
 								</div>
 
                                 <div class="row">

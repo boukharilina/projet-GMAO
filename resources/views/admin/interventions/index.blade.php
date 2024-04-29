@@ -33,13 +33,11 @@
 							    <th>ETAT</th>
 								<th>CLIENT</th>
 								<th>EQUIPEMENT</th>
-                                <th>sous-equipement</th>
 								<th>EQUIPEMENT AVENT VISITE</th>
 								<th>INTERVENANT(s)</th>
-                                <th>SOUS-TRAITANT</th>
 								<th>DESCRIPTION PANNE</th>
-                                <th class="text-uppercase">Priorité</th>
-                                <th>Heure/Date d'appel client</th>
+                                <th>Priorité</th>
+                                <th>Date début</th>
                                 <th>Equipement après visite</th>
 								<th class="action-btn">Action</th>
 							</tr>
@@ -84,14 +82,12 @@
 				{data: 'etat', name: 'etat'},
                 {data: 'client', name: 'client'},
                 {data: 'equipement', name: 'equipement'},
-                {data: 'sousequipement', name: 'sousequipement'},
                 {data: 'etat_initial', name: 'etat_initial'},
                 {data: 'destinateur', name: 'destinateur'},
-                {data: 'soustraitant', name: 'soustraitant'},
 				{data: 'description_panne', name: 'description_panne'},
                 {data: 'priorite', name: 'priorite'},
-                {	data: 'appel_client',
-                    name: 'appel_client',
+                {	data: 'date_debut',
+                    name: 'date_debut',
                     render: function(data, type, row) {
                         if (data) {
                             // Parse the date string using moment.js and format it as 'd-m-y hh:mm'
