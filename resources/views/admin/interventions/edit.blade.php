@@ -60,7 +60,7 @@
 								<div class="form-group">
 								<label for="sousequipement">Sous equipement</label>
 								<select id="sousequipement" class="select2 form-select form-control" name="sousequipement">
-									<option value="Sélectionner un sous equipement">Sélectionner un sous equipement</option>
+									<option value="">Sélectionner un sous equipement</option>
 									@foreach ($sousequipements as $sousequipement)
 										<option value="{{ $sousequipement->id }}"
 											{{ ($intervention->sousequipement_id ?? null) === $sousequipement->id ? 'selected' : '' }}>

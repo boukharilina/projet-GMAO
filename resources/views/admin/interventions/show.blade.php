@@ -33,14 +33,8 @@
 						<ul class="list-unstyled mb-0">
 							<li><h6 class="mb-0"><strong>Etat global : {{ $intervention->etat_final_global }}</strong></h6></li>	
 							<li>
-								<h6 class="text-muted">Date de clôture: @if (!empty($intervention->date_fin_global  && $intervention->date_fin_global != '0000-00-00 00:00:00')) 
-									{
-											$intervention->date_fin_global = {{date_format(date_create($intervention->date_fin_global), "d-m-Y h:m A")}}
-									} 
-									@else {
-											$intervention->date_fin_global= {{'-'}}
-									}
-									@endif</h6>
+								<h6 class="text-muted">Date de clôture: {{$intervention->date_fin_global}}
+									</h6>
 							</li>
 							
 							</li>       
