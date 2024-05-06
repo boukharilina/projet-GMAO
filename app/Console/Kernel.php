@@ -11,8 +11,9 @@ class Kernel extends ConsoleKernel
      * The Artisan commands provided by your application.
      *
      * @var array
-     */
+     */ 
     protected $commands = [
+        Commands\SendContractExpirationReminder::class,
         //
     ];
 
@@ -25,6 +26,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->command('contrat:reminder')->daily();
+        
     }
 
     /**
