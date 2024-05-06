@@ -37,15 +37,6 @@
 				</li>
 				@endcan
 
-				@can('view-sousequipement')
-				<li class="submenu">
-					<a href="#"><i class="fe fe-star-o"></i> <span> Sous Equipements</span> <span class="menu-arrow"></span></a>
-					<ul style="display: none;">
-						<li><a class="{{ route_is('sousequipements.*') ? 'active' : '' }}" href="{{route('sousequipements.index')}}">Sous Equipements</a></li>
-					</ul>
-				</li>
-				@endcan
-
 				@can('view-intervention')
 				<li class="submenu">
 					<a href="#"><i class="fe fe-document"></i> <span> Interventions</span> <span class="menu-arrow"></span></a>

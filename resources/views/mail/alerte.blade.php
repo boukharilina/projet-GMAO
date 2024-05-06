@@ -1,0 +1,1 @@
+<p> Le contrat est proche d'expiration pour le client : <b>{{$contrat->client->name}}</b> </p>

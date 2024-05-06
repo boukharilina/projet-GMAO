@@ -174,16 +174,20 @@ class InterventionController extends Controller
      */
     public function update(Request $request, Intervention $intervention)
     {
-     
+       
         $rapportName = null;
         if($request->hasFile('rapport')){
             $rapportName = time().'.'.$request->rapport->extension();
             $request->rapport->move(public_path('storage/interventions'), $rapportName);
         }
-        $intervention->update([
+        $sousequipementId = null;
+        if ($request->filled('sousequipement')) {
+            $sousequipementId = $request->sousequipement;
+        }     
+        $intervention->update([          
             'client_id'=>$request->client,
             'equipement_id'=>$request->equipement,
-            'sousequipement_id'=>$request->equipement,
+            'sousequipement_id' => $sousequipementId, 
             'etat_initial'=>$request->etat_initial,
             'desciption_panne'=>$request->desciption_panne,
             'priorite'=>$request->priorite,
@@ -195,7 +199,7 @@ class InterventionController extends Controller
             'date_debut'=>$request->date_debut,
             'date_fin'=>$request->date_fin,
             'etat_final'=>$request->etat_final,
-            'date_fin_global'=>$request->date_fin_global,
+            'date_fin_global' => $request->filled('date_fin_global') ? date('Y-m-d H:i:s', strtotime($request->input('date_fin_global'))) : NULL,
             'etat_final_global'=>$request->etat_final_global,
             'etat'=>$request->etat,
             'rapport'=>$rapportName,
@@ -217,6 +221,7 @@ class InterventionController extends Controller
         ]);
         $title = 'rapport interventions';
         $interventions = Intervention::whereBetween(DB::raw('DATE(created_at)'), array($request->from_date, $request->to_date))->get();
+        
         return view('admin.interventions.reports',compact(
             'interventions','title'
         ));

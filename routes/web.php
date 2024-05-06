@@ -109,6 +109,7 @@ Route::middleware(['auth'])->group(function(){
     /*equipements routes */
     Route::resource('equipements',EquipementController::class);
     Route::post('/equipements/{id}/addPiece', [EquipementController::class, 'addPiece'])->name('equipements.addPiece');
+    
 
     /*Contrat routes*/
     Route::resource('contrats',ContratController::class)->except('show');
