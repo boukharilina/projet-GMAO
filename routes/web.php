@@ -11,13 +11,8 @@ use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\Auth\RegisterController;
 use App\Http\Controllers\Admin\Auth\ResetPasswordController;
 use App\Http\Controllers\Admin\Auth\ForgotPasswordController;
-use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PermissionController;
-use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\RoleController;
-use App\Http\Controllers\Admin\SaleController;
-use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\ModalitesController;
 use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\EquipementController;
@@ -30,7 +25,10 @@ use App\Http\Controllers\Admin\SoustraitantController;
 use App\Http\Controllers\Admin\SousinterventionController;
 use App\Http\Controllers\Admin\TacheController;
 use App\Http\Controllers\Admin\PieceController;
+use App\Http\Controllers\Admin\GoogleCalendarController;
 use App\Http\livewire\Calendar ;
+use Spatie\GoogleCalendar\Event;
+use Livewire\Livewire;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,18 +68,15 @@ Route::middleware(['auth'])->group(function(){
 
 
     /*Calendrier*/
-   Route::get('fullcalendar', [CalendarController::class, 'index']);
-   Route::get('/events', [CalendarController::class, 'getEvents']);
-   Route::delete('/calendar/{id}', [CalendarController::class, 'deleteEvent']);
-   Route::put('/calendar/{id}', [CalendarController::class, 'update']);
-   Route::put('/calendar/{id}/resize', [CalendarController::class, 'resize']);
-   Route::get('/events/search', [CalendarController::class, 'search']);
-   Route::view('add-calendar', 'admin.calendar.add');
-   Route::post('create-calendar', [CalendarController::class, 'create']);
-
-   Route::get('/calender', function () {
-    return view('home');
-});
+    Route::get('/calendar', [Calendar::class, 'index']);
+    Route::post('/save-event', [Calendar::class, 'saveEvent']);
+    Route::get('/google-calendar/connect',[GoogleCalendarController::class, 'connect']);
+    Route::post('/google-calendar/connect',[GoogleCalendarController::class, 'store']);
+    Route::get('/get-resource',[GoogleCalendarController::class,'getResources']);
+    Route::get('/get-events',function(){
+        $e = Event:: get();
+        dd($e);
+    });
 
     Route::get('backup', [BackupController::class,'index'])->name('backup.index');
     Route::put('backup/create', [BackupController::class,'create'])->name('backup.store');
