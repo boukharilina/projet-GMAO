@@ -144,11 +144,10 @@ class InterventionController extends Controller
     }
 
 
-
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \app\Models\Intervention $purchase
+     * @param  \app\Models\Intervention $intervention
      * @return \Illuminate\Http\Response
      */ 
     public function edit(Intervention $intervention)
@@ -169,7 +168,7 @@ class InterventionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \app\Models\Intervention $purchase
+     * @param  \app\Models\Intervention $intervention
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Intervention $intervention)
@@ -244,9 +243,7 @@ class InterventionController extends Controller
         
 
         ));
-        return Carbon::createFromTimeStamp($date_fin_global)->toDateString();
-
- 
+        
     }
 
     /**

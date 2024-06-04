@@ -33,7 +33,7 @@
 							    <th>ETAT</th>
 								<th>CLIENT</th>
 								<th>EQUIPEMENT</th>
-								<th>EQUIPEMENT AVENT VISITE</th>
+								<th>EQUIPEMENT AVANT VISITE</th>
 								<th>INTERVENANT(s)</th>
 								<th>DESCRIPTION PANNE</th>
                                 <th>Priorité</th>

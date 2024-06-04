@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEventsTable extends Migration
+class AddUserAndCommentToEventsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class CreateEventsTable extends Migration
      */
     public function up()
     {
-        Schema::create('events', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
+        Schema::table('events', function (Blueprint $table) {
+            //
             $table->string('user')->nullable();
             $table->text('comment')->nullable();
-            $table->datetime('start');
-            $table->datetime('end');
-            $table->timestamps();
         });
     }
 
@@ -31,6 +27,10 @@ class CreateEventsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('events');
+        Schema::table('events', function (Blueprint $table) {
+            //
+            $table->dropColumn('user');
+            $table->dropColumn('comment');
+        });
     }
 }

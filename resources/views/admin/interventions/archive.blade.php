@@ -30,15 +30,15 @@
 					<table id="intervention-archive-table" class="datatable table table-hover table-center mb-0">
 						<thead>
 							<tr class="text-uppercase">
-							    <th>Etat</th>
-								<th>Client</th>
-								<th>Equipement</th>
-								<th>Panne Initial</th>
-								<th>Intervenant(s)</th>
-                                <th>Sous-traitant</th>
-                                <th>Sous equipement</th>
-								<th>Description Panne</th>
-                                <th>Heure/Date d'appel client</th>
+							    <th>ETAT</th>
+								<th>CLIENT</th>
+								<th>EQUIPEMENT</th>
+								<th>EQUIPEMENT AVANT VISITE</th>
+								<th>INTERVENANT(s)</th>
+								<th>DESCRIPTION PANNE</th>
+                                <th>Priorité</th>
+                                <th>Date début</th>
+                                <th>Equipement après visite</th>
 								<th class="action-btn">Action</th>
 							</tr>
 						</thead>
@@ -65,7 +65,7 @@
 @push('page-js')
 <script>
     // Show spinner when DataTable is processing
-    $('#intervention-archive-table').on('processing.dt', function(e, settings, processing) {
+     $('#intervention-table').on('processing.dt', function(e, settings, processing) {
       if (processing) {
         $('#spinner').show();
       } else {
@@ -74,21 +74,20 @@
     });
 
     $(document).ready(function() {
-        var table = $('#intervention-archive-table').DataTable({
+        var table = $('#intervention-table').DataTable({
             processing: false,
             serverSide: false,
-            ajax: "{{route('interventions.archive')}}",
+            ajax: "{{route('interventions.index')}}",
             columns: [
 				{data: 'etat', name: 'etat'},
                 {data: 'client', name: 'client'},
                 {data: 'equipement', name: 'equipement'},
-                {data: 'type_panne', name: 'type_panne'},
+                {data: 'etat_initial', name: 'etat_initial'},
                 {data: 'destinateur', name: 'destinateur'},
-                {data: 'soustraitant', name: 'soustraitant'},
-                {data: 'sousequipement', name: 'sousequipement'},
 				{data: 'description_panne', name: 'description_panne'},
-                {	data: 'appel_client',
-                    name: 'appel_client',
+                {data: 'priorite', name: 'priorite'},
+                {	data: 'date_debut',
+                    name: 'date_debut',
                     render: function(data, type, row) {
                         if (data) {
                             // Parse the date string using moment.js and format it as 'd-m-y hh:mm'
@@ -98,6 +97,7 @@
                         return '';
                     }
                 },
+                {data: 'etat_final', name: 'etat_final'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]
         });

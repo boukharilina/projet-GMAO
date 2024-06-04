@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="{{asset('assets/plugins/select2/css/select2.min.css')}}">
     <!-- Main CSS -->
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+  
     <!-- Page CSS -->
     @stack('page-css')
     <!--[if lt IE 9]>
