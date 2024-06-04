@@ -60,7 +60,7 @@
 								<div class="form-group">
 								<label for="sousequipement">Sous equipement</label>
 								<select id="sousequipement" class="select2 form-select form-control" name="sousequipement">
-									<option value="Sélectionner un sous equipement">Sélectionner un sous equipement</option>
+									<option value="">Sélectionner un sous equipement</option>
 									@foreach ($sousequipements as $sousequipement)
 										<option value="{{ $sousequipement->id }}"
 											{{ ($intervention->sousequipement_id ?? null) === $sousequipement->id ? 'selected' : '' }}>
@@ -270,24 +270,24 @@
 									<label>Priorité</label>
 									<select  class="select2 form-select form-control" name="priorite">
 
-									@if ( $intervention->priorite == "Tres urgent")
+									@if ( $intervention->priorite == "Très urgent")
 										<option >Selectionner une priorité</option>
-										<option selected value='Tres urgent'>Tres urgent</option>
+										<option selected value='Très urgent'>Très urgent</option>
 										<option value="Urgent">Urgent</option>
 										<option value="Normale">Normale</option>
 
 									@elseif ($intervention->priorite == "Urgent")
 										<option selected value='Urgent'>Urgent</option>
 										<option value='Normale'>Normale</option>
-										<option value='Tres urgent'>Tres urgent</option>
+										<option value='Très urgent'>Très urgent</option>
 
 									@elseif ($intervention->priorite == "Normale")
 										<option selected value='Normale'>Normale</option>
-										<option value='Tres urgent'>Tres urgent</option>
+										<option value='Très urgent'>Très urgent</option>
 										<option value='Urgent'>Urgent</option>
                                     @else
                                         <option value='Normale'>Normale</option>
-										<option value='Tres urgent'>Tres urgent</option>
+										<option value='Très urgent'>Très urgent</option>
 										<option value='Urgent'>Urgent</option>
 									@endif
 									</select>

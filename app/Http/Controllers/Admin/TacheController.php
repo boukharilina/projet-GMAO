@@ -81,7 +81,7 @@ class TacheController extends Controller
      */
     public function create()
     {
-        $title = 'ajouter tache';
+        $title = 'ajouter tâche';
         $users = User::whereIn('role', ['technicien', 'ingenieur','administrateur'])->get();
         return view('admin.taches.create',compact(
             'title','users'
@@ -121,12 +121,14 @@ class TacheController extends Controller
      */
     public function edit(Tache $tach)
     {
-        $title = 'edit tache';
+        $title = 'modifier tâche';
         $users = User::whereIn('role', ['technicien', 'ingenieur','administrateur'])->get();
         return view('admin.taches.edit',compact(
             'title','tach','users'
         ));
     }
+
+
 
     /**
      * Update the specified resource in storage.
@@ -160,10 +162,12 @@ class TacheController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
-    {
-        return Tache::findOrFail($request->id)->delete();
+
+
     }
+        public function destroy(Request $request)
+        {
+            return Tache::findOrFail($request->id)->delete();
+        }
 
 }
-

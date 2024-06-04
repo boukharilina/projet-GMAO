@@ -24,7 +24,7 @@
         </div>
         <div class="col-sm-6 m-b-20">
                 <h3 class="text-uppercase">client : {{$client->name }}</h3>
-                <h6 class="text-muted"><strong align="right">Adresse: </strong><span>{{ $client->adress }}</span></h6>
+                <h6 class="text-muted"><strong align="right">Adresse: </strong><span>{{ $client->address }}</span></h6>
         </div>
     </div>
 

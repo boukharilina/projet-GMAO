@@ -150,7 +150,7 @@ class InterventionController extends Controller
      *
      * @param  \app\Models\Intervention $purchase
      * @return \Illuminate\Http\Response
-     */ 
+     */
     public function edit(Intervention $intervention)
     {
         $title = 'modifier intervention';
@@ -169,21 +169,25 @@ class InterventionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \app\Models\Intervention $purchase
+     * @param  \app\Models\Intervention $intervention
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Intervention $intervention)
     {
-     
+
         $rapportName = null;
         if($request->hasFile('rapport')){
             $rapportName = time().'.'.$request->rapport->extension();
             $request->rapport->move(public_path('storage/interventions'), $rapportName);
         }
+        $sousequipementId = null;
+        if ($request->filled('sousequipement')) {
+            $sousequipementId = $request->sousequipement;
+        }
         $intervention->update([
             'client_id'=>$request->client,
             'equipement_id'=>$request->equipement,
-            'sousequipement_id'=>$request->equipement,
+            'sousequipement_id' => $sousequipementId,
             'etat_initial'=>$request->etat_initial,
             'desciption_panne'=>$request->desciption_panne,
             'priorite'=>$request->priorite,
@@ -195,7 +199,7 @@ class InterventionController extends Controller
             'date_debut'=>$request->date_debut,
             'date_fin'=>$request->date_fin,
             'etat_final'=>$request->etat_final,
-            'date_fin_global'=>$request->date_fin_global,
+            'date_fin_global' => $request->filled('date_fin_global') ? date('Y-m-d H:i:s', strtotime($request->input('date_fin_global'))) : null,
             'etat_final_global'=>$request->etat_final_global,
             'etat'=>$request->etat,
             'rapport'=>$rapportName,
@@ -236,12 +240,12 @@ class InterventionController extends Controller
         return view('admin.interventions.show',compact(
             'title','clients','sousequipements','intervention',
             'users','equipements','soustraitants','sousinterventions','pieces','etats'
-        
+
 
         ));
         return Carbon::createFromTimeStamp($date_fin_global)->toDateString();
 
- 
+
     }
 
     /**
@@ -327,7 +331,7 @@ class InterventionController extends Controller
         ));
     }
 
-    public function unclosed(Request $request) 
+    public function unclosed(Request $request)
     {
         $title = 'interventions Non Clôturés';
         if($request->ajax()){

@@ -47,7 +47,7 @@
 									<option value="Sélectionner un equipement">Sélectionner un equipement</option>
 								</select>
 							</div>
-						</div>  
+						</div>
 
 							<div class="col-lg-4">
 								<div class="form-group">
@@ -74,7 +74,7 @@
                                     </select>
 								</div>
 							</div>
-							
+
 							<div class="col-lg-6">
 								<div class="form-group">
 									<label>Description panne<span class="text-danger">*</span></label>
@@ -150,7 +150,7 @@
                                         <option value="Très urgent">Très urgent</option>
                                         <option value="Urgent">Urgent</option>
                                         <option value="Normale">Normale</option>
-                                    </select>
+                                    </select> 
 								</div>
 							</div>
 						</div>
@@ -197,7 +197,7 @@
 	<!-- Datetimepicker JS -->
 	<script src="{{asset('assets/js/moment.min.js')}}"></script>
 	<script src="{{asset('assets/js/bootstrap-datetimepicker.min.js')}}"></script>
-	<script> 
+	<script>
         function getEquipements(clientId) {
             fetch('/getEquipements?client_id=' + clientId)
                 .then(response => response.json())
