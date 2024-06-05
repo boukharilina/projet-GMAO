@@ -70,21 +70,9 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/UpdategetEquipements', [EquipementController::class, 'UpdategetEquipements']);
 
 
-<<<<<<< HEAD
-    /*Calendrier routes*/
-   Route::get('fullcalendar', [CalendarController::class, 'index']);
-   Route::get('/events', [CalendarController::class, 'getEvents']);
-   Route::delete('/calendar/{id}', [CalendarController::class, 'deleteEvent']);
-   Route::put('/calendar/{id}', [CalendarController::class, 'update']);
-   Route::put('/calendar/{id}/resize', [CalendarController::class, 'resize']);
-   Route::get('/events/search', [CalendarController::class, 'search']);
-   Route::view('add-calendar', 'admin.calendar.add');
-   Route::post('create-calendar', [CalendarController::class, 'create']);
-
    Route::get('/calender', function () {
     return view('home');
     });
-=======
     /*Calendrier*/
     Route::get('/calendar', [Calendar::class, 'index']);
     Route::post('/save-event', [Calendar::class, 'saveEvent']);
@@ -102,7 +90,6 @@ Route::middleware(['auth'])->group(function(){
     Route::delete('backup/delete/{file_name?}', [BackupController::class,'destroy'])->where('file_name', '(.*)')->name('backup.destroy');
 
     Route::get('settings',[SettingController::class,'index'])->name('settings');
->>>>>>> lina
     /*sous traitants routes*/
     Route::resource('soustraitants',SoustraitantController::class);
 
