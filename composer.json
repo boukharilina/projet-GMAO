@@ -9,7 +9,6 @@
         "doctrine/dbal": "^3.3",
         "fruitcake/laravel-cors": "^2.0",
         "fx3costa/laravelchartjs": "^2.9",
-        "google/apiclient": "*",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.65",
         "laravel/sanctum": "^2.11",
@@ -19,7 +18,7 @@
         "saade/filament-fullcalendar": "^1.6",
         "spatie/laravel-backup": "^6.16",
         "spatie/laravel-google-calendar": "^3.8",
-        "spatie/laravel-permission": "*",
+        "spatie/laravel-permission": "^6.7",
         "swiftmailer/swiftmailer": "^6.3",
         "tattali/calendar-bundle": "^1.2",
         "yajra/laravel-datatables": "^1.5"
@@ -41,9 +40,6 @@
         },
         "files": [
             "app/Helpers/Helpers.php"
-        ],
-        "classmap": [
-            "vendor/google/apiclient/src/Google"
         ]
     },
     "autoload-dev": {

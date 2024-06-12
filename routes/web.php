@@ -25,6 +25,7 @@ use App\Http\Controllers\Admin\SoustraitantController;
 use App\Http\Controllers\Admin\SousinterventionController;
 use App\Http\Controllers\Admin\TacheController;
 use App\Http\Controllers\Admin\PieceController;
+use App\Http\Controllers\Admin\InstallationController;
 use App\Http\Controllers\Admin\GoogleCalendarController;
 use App\Http\livewire\Calendar ;
 use Spatie\GoogleCalendar\Event;
@@ -67,17 +68,12 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/UpdategetEquipements', [EquipementController::class, 'UpdategetEquipements']);
 
 
-    /*Calendrier*/
-    Route::get('/calendar', [Calendar::class, 'index']);
-    Route::post('/save-event', [Calendar::class, 'saveEvent']);
-    Route::get('/google-calendar/connect',[GoogleCalendarController::class, 'connect']);
-    Route::post('/google-calendar/connect',[GoogleCalendarController::class, 'store']);
-    Route::get('/get-resource',[GoogleCalendarController::class,'getResources']);
-    Route::get('/get-events',function(){
-        $e = Event:: get();
-        dd($e);
+    /*Calendrier routes*/
+    Route::get('/calendar', function () {
+        return view('calendar.index');
     });
-
+    
+   
     Route::get('backup', [BackupController::class,'index'])->name('backup.index');
     Route::put('backup/create', [BackupController::class,'create'])->name('backup.store');
     Route::get('backup/download/{file_name?}', [BackupController::class,'download'])->name('backup.download');
@@ -86,6 +82,9 @@ Route::middleware(['auth'])->group(function(){
     Route::get('settings',[SettingController::class,'index'])->name('settings');
     /*sous traitants routes*/
     Route::resource('soustraitants',SoustraitantController::class);
+
+     /*installations  routes*/
+     Route::resource('installations',InstallationController::class);
 
     /*clients routes*/
     Route::resource('clients',ClientController::class);

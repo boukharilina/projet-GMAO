@@ -52,8 +52,8 @@
 				@endcan
 
 
-				<li class="{{ route_is('calender.*') ? 'active' : '' }}">
-				<a href="/calender"><i class="fa fa-calendar"></i><span>Plan Maintenance</span></a>
+				<li class="{{ route_is('calendar.*') ? 'active' : '' }}">
+				<a href="/calendar"><i class="fa fa-calendar"></i><span>Plan Maintenance</span></a>
 				</li>
 
 				@can('view-contrat')
@@ -74,7 +74,8 @@
 					<a href="#"><i class="fe fe-user"></i> <span> Clients</span> <span class="menu-arrow"></span></a>
 					<ul style="display: none;">
 						<li><a class="{{ route_is('clients.*') ? 'active' : '' }}" href="{{route('clients.index')}}">Clients</a></li>
-						@can('create-client')<li><a class="{{ route_is('clients.create') ? 'active' : '' }}" href="{{route('clients.create')}}">Ajouter Client</a></li>@endcan
+						@can('create-client')<li><a class="{{ route_is('clients.create') ? 'active' : '' }}" href="{{route('clients.create')}}">Ajouter Client</a></li>
+						@endcan
 					</ul>
 				</li>
 				@endcan
@@ -85,10 +86,24 @@
 					<a href="#"><i class="fe fe-user"></i> <span>Sous-traitants</span> <span class="menu-arrow"></span></a>
 					<ul style="display: none;">
 						<li><a class="{{ route_is('soustraitants.*') ? 'active' : '' }}" href="{{route('soustraitants.index')}}">Sous-traitants</a></li>
-						@can('create-soustraitant')<li><a class="{{ route_is('soustraitants.create') ? 'active' : '' }}" href="{{route('soustraitants.create')}}">Ajouter Sous-traitant</a></li>@endcan
+						@can('create-soustraitant')<li><a class="{{ route_is('soustraitants.create') ? 'active' : '' }}" href="{{route('soustraitants.create')}}">Ajouter Sous-traitant</a></li>
+						@endcan
 					</ul>
 				</li>
 				@endcan
+
+				@can('view-installation')
+				<li class="submenu">
+					<a href="#"><i class="fe fe-document"></i> <span>Installations</span> <span class="menu-arrow"></span></a>
+					<ul style="display: none;">
+						<li><a class="{{ route_is('installations.*') ? 'active' : '' }}" href="{{route('installations.index')}}">Installation</a></li>
+						@can('create-installation')
+						<li><a class="{{ route_is('installations.create') ? 'active' : '' }}" href="{{route('installations.create')}}">Ajouter Installation</a></li>
+						@endcan
+					</ul>
+				</li>
+				@endcan
+
 
 				@can('view-tache')
 				<li class="submenu">
