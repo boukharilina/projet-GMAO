@@ -128,7 +128,7 @@ class InterventionController extends Controller
         Intervention::create([
             'client_id'=>$request->client,
             'equipement_id'=>$request->equipement,
-            'sousequipement_id'=>$request->equipement,
+            'sousequipement_id'=>$request->equipement, 
             'etat_initial'=>$request->etat_initial,
             'description_panne'=>$request->description_panne,
             'priorite'=>$request->priorite,

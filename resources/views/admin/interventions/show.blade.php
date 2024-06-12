@@ -76,12 +76,12 @@
 
                                 <div class="row">
 									<p class="col-sm-E text-muted text-sm-right mv-0 mb-sm-2">Heure/Date d'appel client :</p>
-									<p class="col-sm-9">{{date('d-m-Y h:m A', strtotime($intervention->appel_client))}}</p>
+									<p class="col-sm-9">{{$intervention->appel_client}}</p>
 								</div>
 
                                 <div class="row">
 									<p class="col-sm-2 text-muted text-sm-right mv-0 mb-sm-3">Mode d'appel client :</p>
-									<p class="col-sm-15">	{{$intervention->mode_appel}}</p>
+									<p class="col-sm-15">{{$intervention->mode_appel}}</p>
 								</div>
 
 								<div class="row">
@@ -108,12 +108,12 @@
 
                                 <div class="row">
 									<p class="col-sm-2 text-muted text-sm-right mv-0 mb-sm-3">Date/Heure de début :</p>
-									<p class="col-sm-15">{{date('d-m-Y h:m A', strtotime($intervention->date_debut))}}</p>
+									<p class="col-sm-15">{{$intervention->date_debut}}</p>
 								</div>
 
                                 <div class="row">
 									<p class="col-sm-2 text-muted text-sm-right mv-0 mb-sm-3">Date/Heure de fin :</p>
-									<p class="col-sm-15">{{!empty($intervention->date_fin) ? date('d-M-Y', strtotime($intervention->date_fin)) : null}}</p>
+									<p class="col-sm-15">{{$intervention->date_fin}}</p>
 								</div>
 
                                 <div class="row">
