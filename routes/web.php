@@ -72,25 +72,10 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/UpdategetEquipements', [EquipementController::class, 'UpdategetEquipements']);
 
 
-<<<<<<< HEAD
    Route::get('/calender', function () {
     return view('home');
     });
-    /*Calendrier*/
-    Route::get('/calendar', [Calendar::class, 'index']);
-    Route::post('/save-event', [Calendar::class, 'saveEvent']);
-    Route::get('/google-calendar/connect',[GoogleCalendarController::class, 'connect']);
-    Route::post('/google-calendar/connect',[GoogleCalendarController::class, 'store']);
-    Route::get('/get-resource',[GoogleCalendarController::class,'getResources']);
-    Route::get('/get-events',function(){
-        $e = Event:: get();
-        dd($e);
-=======
-    /*Calendrier routes*/
-    Route::get('/calendar', function () {
-        return view('calendar.index');
->>>>>>> lina
-    });
+
     
    
     Route::get('backup', [BackupController::class,'index'])->name('backup.index');
