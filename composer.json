@@ -6,7 +6,11 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0|^8.1",
+<<<<<<< HEAD
         "ext-gd": "*",
+=======
+        "barryvdh/laravel-dompdf": "^2.2",
+>>>>>>> lina
         "doctrine/dbal": "^3.3",
         "fruitcake/laravel-cors": "^2.0",
         "fx3costa/laravelchartjs": "^2.9",
@@ -15,6 +19,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.12",
+        "maatwebsite/excel": "^3.1",
         "qcod/laravel-app-settings": "^1.5",
         "saade/filament-fullcalendar": "^1.6",
         "spatie/laravel-backup": "^6.16",

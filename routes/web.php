@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\SousinterventionController;
 use App\Http\Controllers\Admin\TacheController;
 use App\Http\Controllers\Admin\PieceController;
 use App\Http\Controllers\Admin\InstallationController;
+use App\Http\Controllers\Admin\EquipementDemoController;
 use App\Http\Controllers\Admin\GoogleCalendarController;
 use App\Http\livewire\Calendar ;
 use Spatie\GoogleCalendar\Event;
@@ -130,6 +131,12 @@ Route::middleware(['auth'])->group(function(){
     /*equipements routes */
     Route::resource('equipements',EquipementController::class);
     Route::post('/equipements/{id}/addPiece', [EquipementController::class, 'addPiece'])->name('equipements.addPiece');
+
+     /*equipements démo routes */
+     Route::resource('equipementdemos',EquipementDemoController::class);
+     Route::get('/equipementdemos/generate-pdf', [EquipementDemoController::class, 'generatePdf'])->name('equipementdemos.generatePdf');
+    Route::get('/equipementdemos/generate-excel', [EquipementDemoController::class, 'generateExcel'])->name('equipementdemos.generateExcel');
+
     
 
     /*Contrat routes*/
