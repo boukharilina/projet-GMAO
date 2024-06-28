@@ -96,6 +96,14 @@
                                             <input type="date" name="to_date" class="form-control to_date">
                                         </div>
                                     </div>
+                                    <!--
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label>Nom du Client</label>
+                                            <input type="text" name="client" class="form-control client_name">
+                                        </div>
+                                    </div> -->
+                                    
                                 </div>
                             </div>
                         </div>

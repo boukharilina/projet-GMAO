@@ -123,7 +123,7 @@
                 <h4 class="card-title text-center">Maintenance Préventive</h4>
             </div>
            <div class="card-body">
-                <div id="calendar" wire:ignore></div>
+            <iframe src="https://calendar.google.com/calendar/embed?src=7ff90f956b84596b59ca09b35085f02110487299c7002b895c1fced2d5db6a80%40group.calendar.google.com&ctz=Africa%2FTunis" style="border: 0" width="600" height="400" frameborder="0" scrolling="no"></iframe>
             </div>
         </div>
         <!-- /Calendrier -->

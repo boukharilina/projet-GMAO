@@ -62,9 +62,12 @@
 								<td>{{$equipement->software}}</td>
                                 <td>{{$equipement->client->name}}</td>
                                 <td class="text-center">
-                                    <a href="{{route('equipements.show', $equipement->id)}}" class="btn btn-success btn-sm"><i class="fas fa-eye"></i></a>
                                     <a href="{{route('equipements.edit', $equipement->id)}}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
-                                </td>
+									<a href="{{route('equipements.show', $equipement->id)}}" class="btn btn-success btn-sm"><i class="fas fa-eye"></i></a>
+									<a data-id="{{$equipement->id}}" href="javascript:void(0);" class="btn btn-sm bg-danger-light deletebtn" data-toggle="modal">
+										<i class="fe fe-trash"></i> Delete
+									</a>
+								</td>
 							</tr>
                             @endif
 							@endforeach
@@ -77,7 +80,11 @@
 
 	</div>
 </div>
+
+
+	
 @endsection
+
 
 @push('page-js')
 <script src="{{asset('assets/plugins/datatables.net/js/jquery.dataTables.min.js')}}"></script>

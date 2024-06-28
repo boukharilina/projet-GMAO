@@ -37,15 +37,6 @@
 				</li>
 				@endcan
 
-				@can('view-sousequipement')
-				<li class="submenu">
-					<a href="#"><i class="fe fe-star-o"></i> <span> Sous Equipements</span> <span class="menu-arrow"></span></a>
-					<ul style="display: none;">
-						<li><a class="{{ route_is('sousequipements.*') ? 'active' : '' }}" href="{{route('sousequipements.index')}}">Sous Equipements</a></li>
-					</ul>
-				</li>
-				@endcan
-
 				@can('view-intervention')
 				<li class="submenu">
 					<a href="#"><i class="fe fe-document"></i> <span> Interventions</span> <span class="menu-arrow"></span></a>
@@ -61,8 +52,8 @@
 				@endcan
 
 
-				<li class="{{ route_is('calender.*') ? 'active' : '' }}">
-				<a href="/calender"><i class="fa fa-calendar"></i><span>Plan Maintenance</span></a>
+				<li class="{{ route_is('calendar.*') ? 'active' : '' }}">
+				<a href="/calendar"><i class="fa fa-calendar"></i><span>Plan Maintenance</span></a>
 				</li>
 
 				@can('view-contrat')
@@ -115,7 +106,7 @@
 				<li class="submenu">
 					<a href="#"><i class="fe fe-document"></i> <span> Rapports</span> <span class="menu-arrow"></span></a>
 					<ul style="display: none;">
-						
+
 						<li><a class="{{ route_is('equipements.report') ? 'active' : '' }}" href="{{route('equipements.report')}}">Rapport Equipements</a></li>
 						<li><a class="{{ route_is('interventions.report') ? 'active' : '' }}" href="{{route('interventions.report')}}">Rapport Interventions</a></li>
                         <li><a class="{{ route_is('contrats.report') ? 'active' : '' }}" href="{{route('contrats.report')}}">Rapport Contrats</a></li>

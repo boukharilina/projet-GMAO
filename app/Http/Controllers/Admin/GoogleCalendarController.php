@@ -1,60 +1,22 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Services\GoogleCalendar;
+use Spatie\GoogleCalendar\Event;
+use Google\Client as GoogleClient;
+use Google\Service\Calendar as GoogleCalendar;
 
-class GoogleCalendarController extends Controller
+class CalendarController extends Controller
 {
-    //
-    public function connect()
+    public function showEvents()
     {
-    $googleCalendar = new GoogleCalendar();
-    $client = $googleCalendar->getClient();
-    $authUrl = $client->createAuthUrl();
-    return redirect($authUrl);
+        try {
+            $events = Event::get();
+            return view('calendar.index', compact('events'));
+        } catch (\Exception $e) {
+            return view('calendar.index', ['error' => 'Could not connect to Google Calendar. Please check the logs for more details.']);
+        }
     }
-
-    public function store()
-
-    {
-
-    $client = GoogleCalendar::getClient();
-
-    $authCode = request('code');
-    $credentialsPath = storage_path('keys/client_secret_generated.json');
-
-    //Exchange authorization code for an access token.
-
-    $accessToken = $client->fetchAccessTokenWithAuthCode($authCode);
-
-    // Store the credentials to disk.
-
-    if (!file_exists(dirname($credentialsPath))) {
-
-    mkdir(dirname($credentialsPath), 0700, true);
-
-    }
-
-    file_put_contents($credentialsPath, json_encode($accessToken));
-
-    return redirect('/google-calendar')->with('message', 'Credentials saved');
-
-    }
-
-    public function getResources()
-
-    {
-
-    // Get the authorized client object and fetch the resources.
-
-    $client = GoogleCalendar::oauth();
-
-    return GoogleCalendar::getResources($client);
-
-    }
-
 
 }

@@ -174,7 +174,6 @@ class InterventionController extends Controller
      */
     public function update(Request $request, Intervention $intervention)
     {
-
         $rapportName = null;
         if($request->hasFile('rapport')){
             $rapportName = time().'.'.$request->rapport->extension();
@@ -221,6 +220,7 @@ class InterventionController extends Controller
         ]);
         $title = 'rapport interventions';
         $interventions = Intervention::whereBetween(DB::raw('DATE(created_at)'), array($request->from_date, $request->to_date))->get();
+
         return view('admin.interventions.reports',compact(
             'interventions','title'
         ));

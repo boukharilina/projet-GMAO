@@ -36,7 +36,6 @@
                                     <th>Date de début </th>
                                     <th>Date de fin</th>
                                     <th>Type contrat</th>
-
                                 </tr>
                             </thead>
                             <tbody>
@@ -47,9 +46,7 @@
                                     <td>{{date('d-m-Y', strtotime($contrat->date_debut))}}</td>
                                     <td>{{date('d-m-Y', strtotime($contrat->date_fin))}}</td>
                                     <td>{{$contrat->type_contrat}}</td>
-
                                 </tr>
-
                             @endforeach
                             </tbody>
                         </table>
@@ -77,7 +74,7 @@
                         @csrf
                         <div class="row form-row">
                             <div class="col-12">
-                                <div class="row">
+                                <div class="row"> 
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label>DE</label>

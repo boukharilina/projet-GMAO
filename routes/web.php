@@ -71,20 +71,11 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/getEquipements', [EquipementController::class, 'getEquipements']);
     Route::post('/UpdategetEquipements', [EquipementController::class, 'UpdategetEquipements']);
 
-
     /*Calendrier routes*/
-   Route::get('fullcalendar', [CalendarController::class, 'index']);
-   Route::get('/events', [CalendarController::class, 'getEvents']);
-   Route::delete('/calendar/{id}', [CalendarController::class, 'deleteEvent']);
-   Route::put('/calendar/{id}', [CalendarController::class, 'update']);
-   Route::put('/calendar/{id}/resize', [CalendarController::class, 'resize']);
-   Route::get('/events/search', [CalendarController::class, 'search']);
-   Route::view('add-calendar', 'admin.calendar.add');
-   Route::post('create-calendar', [CalendarController::class, 'create']);
-
-   Route::get('/calender', function () {
-    return view('home');
+    Route::get('/calendar', function () {
+        return view('calendar.index');
     });
+
     /*sous traitants routes*/
     Route::resource('soustraitants',SoustraitantController::class);
 
@@ -114,6 +105,7 @@ Route::middleware(['auth'])->group(function(){
     /*equipements routes */
     Route::resource('equipements',EquipementController::class);
     Route::post('/equipements/{id}/addPiece', [EquipementController::class, 'addPiece'])->name('equipements.addPiece');
+
 
     /*Contrat routes*/
     Route::resource('contrats',ContratController::class)->except('show');
