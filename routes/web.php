@@ -27,6 +27,8 @@ use App\Http\Controllers\Admin\TacheController;
 use App\Http\Controllers\Admin\PieceController;
 use App\Http\Controllers\Admin\GoogleCalendarController;
 use App\Http\livewire\Calendar ;
+use Spatie\GoogleCalendar\Event;
+use Livewire\Livewire;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,6 +80,9 @@ Route::middleware(['auth'])->group(function(){
 
     /*sous traitants routes*/
     Route::resource('soustraitants',SoustraitantController::class);
+
+     /*installations  routes*/
+     Route::resource('installations',InstallationController::class);
 
     /*clients routes*/
     Route::resource('clients',ClientController::class);

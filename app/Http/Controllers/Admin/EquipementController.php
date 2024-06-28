@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 use QCod\AppSettings\Setting\AppSettings;
-use Illuminate\Support\Facades\Cache; // Importer la classe Cache
+use Illuminate\Support\Facades\Cache; 
 
 
 class EquipementController extends Controller

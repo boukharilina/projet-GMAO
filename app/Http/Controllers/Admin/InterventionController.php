@@ -144,11 +144,10 @@ class InterventionController extends Controller
     }
 
 
-
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \app\Models\Intervention $purchase
+     * @param  \app\Models\Intervention $intervention
      * @return \Illuminate\Http\Response
      */
     public function edit(Intervention $intervention)
@@ -220,7 +219,6 @@ class InterventionController extends Controller
         ]);
         $title = 'rapport interventions';
         $interventions = Intervention::whereBetween(DB::raw('DATE(created_at)'), array($request->from_date, $request->to_date))->get();
-
         return view('admin.interventions.reports',compact(
             'interventions','title'
         ));

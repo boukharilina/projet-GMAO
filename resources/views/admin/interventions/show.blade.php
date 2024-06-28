@@ -84,7 +84,7 @@
 
                                 <div class="row">
 									<p class="col-sm-2 text-muted text-sm-right mv-0 mb-sm-3">Mode d'appel client :</p>
-									<p class="col-sm-15">	{{$intervention->mode_appel}}</p>
+									<p class="col-sm-15">{{$intervention->mode_appel}}</p>
 								</div>
 
 								<div class="row">

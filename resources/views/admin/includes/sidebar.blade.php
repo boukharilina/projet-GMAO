@@ -24,7 +24,6 @@
 				</li>
 				@endcan
 
-
 				@can('view-equipement')
 				<li class="submenu">
 					<a href="#"><i class="fe fe-star-o"></i> <span> Equipements</span> <span class="menu-arrow"></span></a>
@@ -37,6 +36,21 @@
 				</li>
 				@endcan
 
+<<<<<<< HEAD
+=======
+				@can('view-equipementdemo')
+				<li class="submenu">
+					<a href="#"><i class="fe fe-star-o"></i> <span> Stock Démo</span> <span class="menu-arrow"></span></a>
+					<ul style="display: none;">
+						<li><a class="{{ route_is('equipementdemos.*') ? 'active' : '' }}" href="{{route('equipementdemos.index')}}">Equipements de démo</a></li>
+						@can('create-equipementdemo')
+						<li><a class="{{ route_is('equipementdemos.create') ? 'active' : '' }}" href="{{route('equipementdemos.create')}}">Ajouter Equipement démo</a></li>
+						@endcan
+					</ul>
+				</li>
+				@endcan
+
+>>>>>>> 47b76151798c524b609dda64e1386535604792a0
 				@can('view-intervention')
 				<li class="submenu">
 					<a href="#"><i class="fe fe-document"></i> <span> Interventions</span> <span class="menu-arrow"></span></a>
@@ -74,7 +88,8 @@
 					<a href="#"><i class="fe fe-user"></i> <span> Clients</span> <span class="menu-arrow"></span></a>
 					<ul style="display: none;">
 						<li><a class="{{ route_is('clients.*') ? 'active' : '' }}" href="{{route('clients.index')}}">Clients</a></li>
-						@can('create-client')<li><a class="{{ route_is('clients.create') ? 'active' : '' }}" href="{{route('clients.create')}}">Ajouter Client</a></li>@endcan
+						@can('create-client')<li><a class="{{ route_is('clients.create') ? 'active' : '' }}" href="{{route('clients.create')}}">Ajouter Client</a></li>
+						@endcan
 					</ul>
 				</li>
 				@endcan
@@ -85,10 +100,24 @@
 					<a href="#"><i class="fe fe-user"></i> <span>Sous-traitants</span> <span class="menu-arrow"></span></a>
 					<ul style="display: none;">
 						<li><a class="{{ route_is('soustraitants.*') ? 'active' : '' }}" href="{{route('soustraitants.index')}}">Sous-traitants</a></li>
-						@can('create-soustraitant')<li><a class="{{ route_is('soustraitants.create') ? 'active' : '' }}" href="{{route('soustraitants.create')}}">Ajouter Sous-traitant</a></li>@endcan
+						@can('create-soustraitant')<li><a class="{{ route_is('soustraitants.create') ? 'active' : '' }}" href="{{route('soustraitants.create')}}">Ajouter Sous-traitant</a></li>
+						@endcan
 					</ul>
 				</li>
 				@endcan
+
+				@can('view-installation')
+				<li class="submenu">
+					<a href="#"><i class="fe fe-document"></i> <span>Installations</span> <span class="menu-arrow"></span></a>
+					<ul style="display: none;">
+						<li><a class="{{ route_is('installations.*') ? 'active' : '' }}" href="{{route('installations.index')}}">Installation</a></li>
+						@can('create-installation')
+						<li><a class="{{ route_is('installations.create') ? 'active' : '' }}" href="{{route('installations.create')}}">Ajouter Installation</a></li>
+						@endcan
+					</ul>
+				</li>
+				@endcan
+
 
 				@can('view-tache')
 				<li class="submenu">

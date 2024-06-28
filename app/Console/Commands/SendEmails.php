@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+<<<<<<< HEAD
 use Illuminate\Support\Facades\Mail;
 use App\Models\Contrat;
 use Carbon\Carbon;
@@ -13,11 +14,36 @@ class SendEmails extends Command
     protected $signature = 'emails:send';
     protected $description = 'Send custom emails';
 
+=======
+
+class SendEmails extends Command
+{
+    /**
+     * The name and signature of the console command.
+     * 
+     * @var string
+     */
+    protected $signature = 'emails:send';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Send custom emails';
+
+    /**
+     * Create a new command instance.
+     *
+     * @return void
+     */
+>>>>>>> 47b76151798c524b609dda64e1386535604792a0
     public function __construct()
     {
         parent::__construct();
     }
 
+<<<<<<< HEAD
     /*public function handle()
     {
         //$dateThreshold = Carbon::now()->addDays(14)->toDateString();
@@ -104,10 +130,27 @@ class SendEmails extends Command
                     Log::error('Failed to send email to ' . $toEmail . ': ' . $e->getMessage());
                 }
             }
+=======
+    /**
+     * Execute the console command.
+     *
+     * @return int
+     */
+    public function handle()
+    {
+        $users = User::all();
+
+        foreach ($users as $user) {
+            Mail::to($user->email)->send(new MyCustomMail());
+>>>>>>> 47b76151798c524b609dda64e1386535604792a0
         }
 
         $this->info('Emails sent successfully!');
     }
+<<<<<<< HEAD
 
 
+=======
+    
+>>>>>>> 47b76151798c524b609dda64e1386535604792a0
 }
