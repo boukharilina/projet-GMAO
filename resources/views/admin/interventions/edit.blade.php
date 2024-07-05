@@ -112,7 +112,7 @@
 								</div>
 							</div>
 							<div class="col-lg-6">
-								<div class="form-group">
+								<div class="form-group"> 
 									<label>Description panne<span class="text-danger">*</span></label>
 									<input class="form-control" type="text" name="description_panne" placeholder="décrire la panne" value="{{$intervention->description_panne}}">
 								</div>

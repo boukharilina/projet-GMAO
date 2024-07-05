@@ -60,9 +60,8 @@
 								<div class="form-group">
 	                                <label>Etat contrat<span class="text-danger">*</span></label>
 									<select  class="select2 form-select form-control" name="status">
-									<option >Sélectionner etat contrat</option>
+                                    <option >Sélectionner l'état du contrat</option>
                                     @if ( $contrat->status == "En cours")
-                                        <option >Sélectionner l'état du contrat</option>
                                         <option selected value='En cours'>En cours</option>
                                         <option value='Proche expiration'>Proche expiration</option>
                                         <option value='Renouvelé'>Renouvelé</option>
@@ -71,7 +70,6 @@
                                         <option value='En cours rénégociation'>En cours rénégociation</option>
 
                                     @elseif ( $contrat->status == "Proche expiration")
-                                        <option >Sélectionner l'état du contrat</option>
                                         <option selected value='Proche expiration'>Proche expiration</option>
                                         <option value='En cours'>En cours</option>
                                         <option value='Renouvelé'>Renouvelé</option>
@@ -80,7 +78,6 @@
                                         <option value='En cours rénégociation'>En cours rénégociation</option>
 
                                     @elseif ( $contrat->status == "Renouvelé")
-                                        <option >Sélectionner l'état du contrat</option>
                                         <option selected value='Renouvelé'>Renouvelé</option>
                                         <option value='En cours'>En cours</option>
                                         <option value='Proche expiration'>Proche expiration</option>
@@ -89,7 +86,6 @@
                                         <option value='En cours rénégociation'>En cours rénégociation</option>
 
                                     @elseif ( $contrat->status == "Expiré")
-                                        <option >Sélectionner l'état du contrat</option>
                                         <option selected value='Expiré'>Expiré</option>
                                         <option value='En cours'>En cours</option>
                                         <option value='Proche expiration'>Proche expiration</option>
@@ -98,25 +94,19 @@
                                         <option value='En cours rénégociation'>En cours rénégociation</option>
 
                                     @elseif ( $contrat->status == "Attente approbation")
-                                        <option >Sélectionner l'état du contrat</option>
                                         <option selected value='Attente approbation'>Attente approbation</option>
                                         <option value='En cours'>En cours</option>
                                         <option value='Proche expiration'>Proche expiration</option>
                                         <option value='Renouvelé'>Renouvelé</option>
                                         <option value='Expiré'>Expiré</option>
                                         <option value='En cours rénégociation'>En cours rénégociation</option>
-
-
                                     @else
-                                        <option >Sélectionner l'état du contrat</option>
-
                                         <option value='En cours rénégociation'>En cours rénégociation</option>
                                         <option selected value='En cours'>En cours</option>
                                         <option selected value='Proche expiration'>Proche expiration</option>
                                         <option selected value='Renouvelé'>Renouvelé</option>
                                         <option selected value='Expiré'>Expiré</option>
                                         <option selected value='Attente approbation'>Attente approbation</option>
-
                                     @endif
 									</select>
 								</div>

@@ -6,7 +6,7 @@ use App\Models\Intervention;
 use App\Models\User;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
-use QCod\AppSettings\Setting\AppSettings; 
+use QCod\AppSettings\Setting\AppSettings;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -45,7 +45,7 @@ class SousinterventionController extends Controller
                 })
                 ->addColumn('user',function($sousintervention){
                     if(!empty($sousintervention->user)){
-                        return $sousintervention->user->name;
+                        return $sousintervention->user->name; 
                     }
                 })
                 ->addColumn('rapport',function($sousintervention){

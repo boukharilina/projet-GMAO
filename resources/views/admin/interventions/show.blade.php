@@ -33,7 +33,7 @@
 						<ul class="list-unstyled mb-0">
 							<li><h6 class="mb-0"><strong>Etat global : {{ $intervention->etat_final_global }}</strong></h6></li>
                             <li>
-								<h6 class="text-muted">Date de clôture: {{date('d-m-Y h:m A', strtotime($intervention->date_fin_global))}}
+								<h6 class="text-muted">Date de clôture: {{$intervention->date_fin_global}}
 									</h6>
                              </li>
 						</ul>
@@ -327,7 +327,7 @@
                                                         <a data-placement="top" title="Modifier" class='btn btn-info edit-link' data-toggle="modal" data-target="#edit_sousintervention_{{$sousintervention->id}}">
                                                             <i class="fas fa-edit"></i>
                                                         </a>
-                                                        <!-- Bouton "Supprimer" pour chaque sous-intervention -->
+                                                         <!-- Bouton "Supprimer" pour chaque sous-intervention -->
                                                         <a data-toggle="tooltip" data-placement="top" title="Supprimer" class='btn btn-danger' route='interventions.destroy' onclick="return confirm('Voulez-vous vraiment supprimer la demande {{$sousintervention->id}} ?')">
                                                             <i class="fas fa-trash"></i>
                                                         </a>
@@ -477,7 +477,7 @@
 										<div class="col-12">
 											<div class="form-group">
 												<label>Equipement après visite</label>
-												<select  class="select2 form-select form-control" name="etat_initial">
+												<select  class="select2 form-select form-control" name="etat_final">
                                                 @if ( $sousintervention->etat_final == "Fonctionnel")
                                                     <option selected value="Fonctionnel">Fonctionnel</option>
                                                     <option value="Partiellement Fonctionnel">Partiellement Fonctionnel</option>
@@ -519,7 +519,7 @@
 										<div class="col-12">
 											<div class="form-group">
 												<label>Rapport</label>
-												<input type="file" class="form-control" name='rapport' value="{{$sousintervention->rapport ?? old('rapport')}}">>
+												<input type="file" class="form-control" name='rapport' value="{{$sousintervention->rapport ?? old('rapport')}}">
 											</div>
 										</div>
 										<button type="submit" class="btn btn-primary btn-block">Modifier</button>

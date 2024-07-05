@@ -187,7 +187,7 @@ class InterventionController extends Controller
             'equipement_id'=>$request->equipement,
             'sousequipement_id' => $sousequipementId,
             'etat_initial'=>$request->etat_initial,
-            'desciption_panne'=>$request->desciption_panne,
+            'description_panne'=>$request->description_panne,
             'priorite'=>$request->priorite,
             'mode_appel'=>$request->mode_appel,
             'destinateur'=> $request->destinateur,

@@ -65,7 +65,7 @@
 @push('page-js')
 <script>
     // Show spinner when DataTable is processing
-     $('#intervention-table').on('processing.dt', function(e, settings, processing) {
+     $('#intervention-archive-table').on('processing.dt', function(e, settings, processing) {
       if (processing) {
         $('#spinner').show();
       } else {
@@ -74,10 +74,10 @@
     });
 
     $(document).ready(function() {
-        var table = $('#intervention-table').DataTable({
+        var table = $('#intervention-archive-table').DataTable({
             processing: false,
             serverSide: false,
-            ajax: "{{route('interventions.index')}}",
+            ajax: "{{route('interventions.archive')}}",
             columns: [
 				{data: 'etat', name: 'etat'},
                 {data: 'client', name: 'client'},

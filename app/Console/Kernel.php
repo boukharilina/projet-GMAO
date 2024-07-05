@@ -11,19 +11,15 @@ use Carbon\Carbon;
 
 class Kernel extends ConsoleKernel
 {
+    protected $commands = [
+        Commands\SendEmails::class,
+    ];
     /**
      * The Artisan commands provided by your application.
      *
      * @var array
-     */ 
-    protected $commands = [
-<<<<<<< HEAD
-        Commands\SendEmails::class,
-=======
-        Commands\SendContractExpirationReminder::class,
->>>>>>> 47b76151798c524b609dda64e1386535604792a0
-        //
-    ];
+     */
+
 
     /**
      * Define the application's command schedule.
@@ -33,13 +29,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-<<<<<<< HEAD
-        $schedule->command('emails:send')->weeklyOn(2, '12:19');
-=======
-        // $schedule->command('inspire')->hourly();
-        $schedule->command('contrat:reminder')->daily();
-        
->>>>>>> 47b76151798c524b609dda64e1386535604792a0
+        $schedule->command('emails:send')->weeklyOn(1, '08:30');
     }
 
 

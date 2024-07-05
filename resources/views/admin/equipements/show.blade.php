@@ -102,7 +102,7 @@
 
 								<div class="row">
 									<p class="col-sm-2 text-muted text-sm-right mv-0 mb-sm-3">Date de fin</p>
-									<p class="col-sm-10">{{date('d-m-Y', strtotime($equipement->contrat->date_debut))}}</p>
+									<p class="col-sm-10">{{date('d-m-Y', strtotime($equipement->contrat->date_fin))}}</p>
 								</div>
 
 								<div class="row">

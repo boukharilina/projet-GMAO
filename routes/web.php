@@ -26,6 +26,8 @@ use App\Http\Controllers\Admin\SousinterventionController;
 use App\Http\Controllers\Admin\TacheController;
 use App\Http\Controllers\Admin\PieceController;
 use App\Http\Controllers\Admin\GoogleCalendarController;
+use App\Http\Controllers\Admin\EquipementDemoController;
+use App\Http\Controllers\Admin\InstallationController;
 use App\Http\livewire\Calendar ;
 use Spatie\GoogleCalendar\Event;
 use Livewire\Livewire;
@@ -62,6 +64,9 @@ Route::middleware(['auth'])->group(function(){
     /*taches routes*/
     Route::resource('taches',TacheController::class);
 
+     /*installations routes*/
+     Route::resource('installations',InstallationController::class);
+
     Route::get('/google-calendar/connect',[GoogleCalendarController::class, 'connect']);
     Route::post('/google-calendar/connect',[GoogleCalendarController::class, 'store']);
     Route::get('/get-resource',[GoogleCalendarController::class,'getResources']);
@@ -77,6 +82,9 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/calendar', function () {
         return view('calendar.index');
     });
+
+    /*equipement demo routes*/
+    Route::resource('equipementdemos',EquipementDemoController::class);
 
     /*sous traitants routes*/
     Route::resource('soustraitants',SoustraitantController::class);
