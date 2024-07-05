@@ -26,9 +26,9 @@ class MyCustomMail extends Mailable
      *
      * @return $this
      */
-    public function build()
+    /*public function build()
     {
         return $this->view('mail.hello')
         ->subject('Contract Expiration Reminder');
-    }
+    }*/
 }

@@ -33,7 +33,7 @@
 						<ul class="list-unstyled mb-0">
 							<li><h6 class="mb-0"><strong>Etat global : {{ $intervention->etat_final_global }}</strong></h6></li>
                             <li>
-								<h6 class="text-muted">Date de clôture: {{date('d-m-Y h:m A', strtotime($intervention->date_fin_global))}}
+								<h6 class="text-muted">Date de clôture: {{$intervention->date_fin_global}}
 									</h6>
                              </li>
 						</ul>
@@ -94,13 +94,9 @@
 
 								<div class="row">
 									<p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">Intervenant(s) : </p>
-									<p class="col-sm-15">
-                                        @if (is_array($intervention->destinateur))
-                                        {{
-                                           implode(', ', $intervention->destinateur)
-                                         }}
-                                        @endif
-                                    </p>
+									<p class="col-sm-10">
+										{{ $userNamesString }}
+									</p>
 								</div>
 
                                 <div class="row">

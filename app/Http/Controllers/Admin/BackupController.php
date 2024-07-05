@@ -49,7 +49,7 @@ class BackupController extends Controller
         return view('admin.backup',$this->data,compact(
             'title',
         ));
-        
+
     }
 
     /**
@@ -85,8 +85,8 @@ class BackupController extends Controller
         return back()->with($notification);
     }
 
-    
-    
+
+
 
     /**
      * Downloads a backup zip file.
@@ -110,8 +110,7 @@ class BackupController extends Controller
         }
     }
 
-
-
+    
     /**
      * Remove the specified resource from storage.
      *

@@ -36,21 +36,19 @@
 				</li>
 				@endcan
 
-<<<<<<< HEAD
-=======
-				@can('view-equipementdemo')
+                @can('view-equipementdemo')
 				<li class="submenu">
-					<a href="#"><i class="fe fe-star-o"></i> <span> Stock Démo</span> <span class="menu-arrow"></span></a>
+					<a href="#"><i class="fe fe-star-o"></i> <span>Stock Démo</span> <span class="menu-arrow"></span></a>
 					<ul style="display: none;">
 						<li><a class="{{ route_is('equipementdemos.*') ? 'active' : '' }}" href="{{route('equipementdemos.index')}}">Equipements de démo</a></li>
 						@can('create-equipementdemo')
-						<li><a class="{{ route_is('equipementdemos.create') ? 'active' : '' }}" href="{{route('equipementdemos.create')}}">Ajouter Equipement démo</a></li>
+						<li><a class="{{ route_is('equipementdemos.create') ? 'active' : '' }}" href="{{route('equipementdemos.create')}}">Ajouter démo</a></li>
 						@endcan
 					</ul>
 				</li>
 				@endcan
 
->>>>>>> 47b76151798c524b609dda64e1386535604792a0
+
 				@can('view-intervention')
 				<li class="submenu">
 					<a href="#"><i class="fe fe-document"></i> <span> Interventions</span> <span class="menu-arrow"></span></a>

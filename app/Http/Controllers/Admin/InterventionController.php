@@ -49,12 +49,16 @@ class InterventionController extends Controller
                 ->addColumn('etat_initial',function($intervention){
                     return $intervention->etat_initial;
                 })
-                ->addColumn('destinateur',function($intervention){
-                    if (is_array($intervention->destinateur)) {
-                        return implode(', ', $intervention->destinateur);
+                ->addColumn('destinateur', function($intervention) {
+                    // Check if the destinateur is already an array
+                    $userIds = is_array($intervention->destinateur) ? $intervention->destinateur : json_decode($intervention->destinateur, true);
+                    if (!is_array($userIds)) {
+                        return ''; // Return empty string if json_decode fails
                     }
-                    return $intervention->destinateur;
+                    $userNames = User::whereIn('id', $userIds)->pluck('name')->toArray();
+                    return implode(', ', $userNames);
                 })
+
                 ->addColumn('date_debut',function($intervention){
                     return $intervention->date_debut;
                 })
@@ -235,12 +239,21 @@ class InterventionController extends Controller
         $soustraitants = Soustraitant::get();
         $sousinterventions = $intervention->sousinterventions;
         $pieces = $intervention->pieces;
-        return view('admin.interventions.show',compact(
-            'title','clients','sousequipements','intervention',
-            'users','equipements','soustraitants','sousinterventions','pieces','etats'
-
-
-        ));
+         // Check if the destinateur is already an array
+         $userIds = is_array($intervention->destinateur) ? $intervention->destinateur : json_decode($intervention->destinateur, true);
+         if (!is_array($userIds)) {
+             $userNamesString = ''; // Set empty string if json_decode fails
+         } else {
+             $userNames = User::whereIn('id', $userIds)->pluck('name')->toArray();
+             $userNamesString = implode(', ', $userNames);
+         }
+     
+         // If you need to pass the userNamesString to the view, add it to the compact function
+         return view('admin.interventions.show', compact(
+             'title', 'clients', 'sousequipements', 'intervention',
+             'users', 'equipements', 'soustraitants', 'sousinterventions', 'pieces', 'etats', 'userNamesString'
+         ));
+       
         return Carbon::createFromTimeStamp($date_fin_global)->toDateString();
 
 

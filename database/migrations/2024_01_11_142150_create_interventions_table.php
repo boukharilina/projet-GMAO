@@ -22,7 +22,7 @@ class CreateInterventionsTable extends Migration
             $table->string('description_panne')->nullable();
             $table->string('priorite');
             $table->string('mode_appel');
-            $table->string('destinateur');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('soustraitant_id')->nullable()->constrained()->onDelete('cascade');
             $table->string('appel_client');
             $table->text('description_intervention')->nullable();

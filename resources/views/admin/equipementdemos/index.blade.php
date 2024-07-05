@@ -16,8 +16,6 @@
 </div>
 <div class="col-sm-5 col">
 	<a href="{{route('equipementdemos.create')}}" class="btn btn-primary float-right mt-2">Ajouter</a>
-	<button id="generate-pdf" class="btn btn-danger float-right mt-2 mr-2">Générer PDF</button>
-    <button id="generate-excel" class="btn btn-success float-right mt-2 mr-2">Générer Excel</button>
 </div>
 @endpush
 
@@ -66,15 +64,6 @@
 
 @push('page-js')
 
-<script>
-    $('#generate-pdf').on('click', function() {
-        window.location.href = "{{ route('equipementdemos.generatePdf') }}";
-    });
-
-    $('#generate-excel').on('click', function() {
-        window.location.href = "{{ route('equipementdemos.generateExcel') }}";
-    });
-</script>
 <script>
     // Show spinner when DataTable is processing
        $('#equipementdemo-table').on('processing.dt', function(e, settings, processing) {
