@@ -188,7 +188,7 @@ class InterventionController extends Controller
         }
         $intervention->update([
             'client_id'=>$request->client,
-            'equipement_id'=>$request->equipement,
+            'equipement_id'=>$request->equipement,  
             'sousequipement_id' => $sousequipementId,
             'etat_initial'=>$request->etat_initial,
             'desciption_panne'=>$request->desciption_panne,
@@ -409,5 +409,3 @@ class InterventionController extends Controller
         ));
     }
 }
-
-

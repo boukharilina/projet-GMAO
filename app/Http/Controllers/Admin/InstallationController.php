@@ -75,42 +75,59 @@ class InstallationController extends Controller
      */
     public function create()
     {
-        $title = 'ajouter installation';
-        $users = User::whereIn('role', ['technicien', 'ingenieur','administrateur'])->get();
         $clients = Client::all();
-        return view('admin.installations.create',compact(
-            'title','users','clients'
-        ));
+        $users = User::all();
+        return view('admin.installations.create', compact('clients', 'users'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        $this->validate($request,[
-            'client'=>'required',
-     
-        ]); 
-        $userId = $request->input('user_id');  // Fetch user_id from request
-        // Ensure it's an integer
-        $userId = is_array($userId) ? intval($userId[0]) : intval($userId);
-
-        Installation::create([
-            'client_id'=>$request->client,
-            'equipement'=>$request->equipement,
-            'user_id' => $userId,
-            'date_debut'=>$request->date_debut,
-            'status'=>$request->status,
-            'description'=>$request->description,
+        // Validation des données du formulaire
+        $request->validate([
+            'client' => 'required|exists:clients,id',
+            'equipement' => 'required|string|max:255',
+            'user_id' => 'required|array',
+            'user_id.*' => 'exists:users,id',
+            'date_debut' => 'nullable|date',
+            'date_pv_reception' => 'nullable|date',
+            'date_fin_prevu' => 'nullable|date',
+            'note' => 'nullable|string',
+            'inputs' => 'nullable|array',
+            'inputs.*.user_id' => 'nullable|array',
+            'inputs.*.user_id.*' => 'exists:users,id',
+            'inputs.*.date_debut' => 'nullable|date',
+            'inputs.*.date_fin' => 'nullable|date',
+            'inputs.*.comment' => 'nullable|string|max:255',
         ]);
 
-        $notification = notify("installation ajoutée avec succès");
-        return redirect()->route('installations.index')->with($notification);
+        // Création de l'installation
+        $installation = new Installation();
+        $installation->client_id = $request->client;
+        $installation->equipement = $request->equipement;
+        $installation->date_debut = $request->date_debut;
+        $installation->date_pv_reception = $request->date_pv_reception;
+        $installation->date_fin_prevu = $request->date_fin_prevu;
+        $installation->note = $request->note;
+        $installation->save();
+
+        // Attachement des techniciens à l'installation
+        $installation->users()->attach($request->user_id);
+
+        // Sauvegarde des détails des interventions
+        if ($request->has('inputs')) {
+            foreach ($request->inputs as $input) {
+                $installation->interventions()->create([
+                    'user_id' => $input['user_id'],
+                    'date_debut' => $input['date_debut'],
+                    'date_fin' => $input['date_fin'],
+                    'comment' => $input['comment'],
+                ]);
+            }
+        }
+
+        return redirect()->route('installations.index')->with('success', 'Installation ajoutée avec succès.');
     }
+
 
 
     /**

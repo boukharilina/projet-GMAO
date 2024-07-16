@@ -172,10 +172,10 @@
 									<label for="destinateur">Intervenant(s) <span class="text-danger">*</span></label>
 									<select class="select2 form-select form-control" name="destinateur[]" multiple>
                                         @foreach($users as $user)
-                                            @if(in_array($user->name, $intervention->destinateur))
-                                                <option selected value='{{ $user->name }}'>{{ $user->name }}</option>
+                                            @if(in_array($user->id, $intervention->destinateur))
+                                                <option selected value='{{ $user->id}}'>{{ $user->name }}</option>
                                             @else
-                                                <option value='{{ $user->name }}'>{{ $user->name }}</option>
+                                                <option value='{{ $user->id}}'>{{ $user->name }}</option>
                                             @endif
                                         @endforeach
                                     </select>

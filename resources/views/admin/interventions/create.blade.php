@@ -108,7 +108,7 @@
 					</div>
 
                     <div class="service-fields mb-3">
-						<div class="row">
+						<div class="row">   
 							<div class="col-lg-6">
 								<div class="form-group">
 									<label for="destinateur">Intervenant(s)<span class="text-danger">*</span></label>

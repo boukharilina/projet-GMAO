@@ -13,7 +13,7 @@ class Intervention extends Model
     use HasFactory;
     use softDeletes;
 
-
+   
     protected $casts = [
         'destinateur' => 'array',
     ];

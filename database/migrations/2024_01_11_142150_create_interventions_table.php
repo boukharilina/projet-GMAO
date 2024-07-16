@@ -30,7 +30,7 @@ class CreateInterventionsTable extends Migration
             $table->datetime('date_debut')->nullable();
             $table->datetime('date_fin')->nullable();
             $table->string('etat_final')->nullable();
-            $table->datetime('date_fin_global')->nullable();
+            $table->datetime('date_fin_global')->nullable();   
             $table->string('etat_final_global')->nullable();
             $table->string('etat');
             $table->string('rapport')->nullable();
