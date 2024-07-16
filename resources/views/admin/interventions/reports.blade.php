@@ -36,10 +36,10 @@
                                     <th>Heure/Date appel client</th>
                                     <th>Mode appel</th>
                                     <th>Panne</th>
-                           
+                                    <th>Heure/Date Début</th>
+                                    <th>Description intervention</th>
+                                    <th>Heure/Date Fin</th>
                                     <th>Etat</th>
-
-
                                 </tr>
                             </thead>
                             <tbody>
@@ -50,10 +50,10 @@
                                     <td>{{$intervention->appel_client}}</td>
                                     <td>{{$intervention->mode_appel}}</td>
                                     <td>{{$intervention->description_panne}}</td>
-
-                                    <td>{{$intervention->etat}}</td>
-
-
+                                    <td>{{$intervention->date_debut}}</td>
+                                    <td>{{$intervention->description_intervention}}</td>
+                                    <td>{{$intervention->date_fin_global}}</td>
+                                    <td>{{$intervention->etat_final_global}}</td>
                                 </tr>
 
                             @endforeach
@@ -103,7 +103,7 @@
                                             <input type="text" name="client" class="form-control client_name">
                                         </div>
                                     </div> -->
-                                    
+
                                 </div>
                             </div>
                         </div>

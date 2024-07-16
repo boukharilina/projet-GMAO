@@ -45,7 +45,7 @@ class SousinterventionController extends Controller
                 })
                 ->addColumn('user',function($sousintervention){
                     if(!empty($sousintervention->user)){
-                        return $sousintervention->user->name; 
+                        return $sousintervention->user->name;
                     }
                 })
                 ->addColumn('rapport',function($sousintervention){
@@ -168,7 +168,7 @@ class SousinterventionController extends Controller
             'etat_final'=>$request->etat_final,
             'intervenant'=>$request->intervenant,
             'description_panne'=>$request->description_panne,
-            'description_sousintervention'=>$request->description_sousintervention,
+            'description_sousintervention'=>$request->description_sousintervention,  
             'rapport'=>$rapportName,
 
         ]);

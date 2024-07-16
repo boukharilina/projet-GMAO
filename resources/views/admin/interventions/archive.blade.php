@@ -3,7 +3,55 @@
 <x-assets.datatables />
 
 @push('page-css')
+<style>
+    body {
+        text-align: center;
+    }
+    .Container{
+        height: 100%;
+        width: 100%;
+        overflow-y: auto;
+        background-color: rgb(255, 255, 255);
+        border-radius: 5px;
+        margin: 0 auto;
+        padding: 25px;
+    }
 
+    .Content{
+        width: 300px;
+        color: rgb(0, 0, 0);
+        text-align: center;
+    }
+
+    .Flipped, .Flipped .Content{
+        transform: rotateX(180deg);
+    }
+
+    /* Designing for scroll-bar */
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: gainsboro;
+        border-radius: 5px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: rgb(149, 143, 143);
+        border-radius: 5px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+    .page-title {
+        text-align: left; /* Assurez-vous que le texte est aligné à gauche */
+    }
+</style>
 @endpush
 
 @push('page-header')
@@ -27,6 +75,8 @@
 		<div class="card">
 			<div class="card-body">
 				<div class="table-responsive">
+                    <div class="Container Flipped">
+                        <div class="Content">
 					<table id="intervention-archive-table" class="datatable table table-hover table-center mb-0">
 						<thead>
 							<tr class="text-uppercase">
@@ -39,6 +89,7 @@
                                 <th>Priorité</th>
                                 <th>Date début</th>
                                 <th>Equipement après visite</th>
+                                <th >Rapport </th>
 								<th class="action-btn">Action</th>
 							</tr>
 						</thead>
@@ -53,6 +104,8 @@
                             </div>
 						</tbody>
 					</table>
+                </div>
+            </div>
 				</div>
 			</div>
 		</div>
@@ -98,6 +151,18 @@
                     }
                 },
                 {data: 'etat_final', name: 'etat_final'},
+                {
+                data: 'rapport',
+                name: 'rapport',
+                render: function(data, type, row) {
+                    if (data) {
+                        return `<a href="{{ url('showrapport') }}/${row.id}" target="_blank" class="btn btn-primary">Voir</a>`;
+                    }
+                    return 'Pas De Rapport';
+                },
+                orderable: false,
+                searchable: false
+            },
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]
         });

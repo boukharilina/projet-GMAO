@@ -114,9 +114,9 @@
 									<label for="destinateur">Intervenant(s)<span class="text-danger">*</span></label>
 								    <select class="select2 form-select form-control"  name="destinateur[]" multiple>
                                        <option>--Sélectionner le/les inetervenant(s)--</option>
-										@foreach ($users as $user)
-											<option value="{{$user->name}}">{{$user->name}}</option>
-										@endforeach
+									   @foreach($users as $user)
+									   		<option value="{{ $user->id }}">{{ $user->name }}</option>
+								   		@endforeach
 									</select>
 								</div>
 							</div>

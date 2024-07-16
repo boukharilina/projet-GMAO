@@ -94,13 +94,9 @@
 
 								<div class="row">
 									<p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">Intervenant(s) : </p>
-									<p class="col-sm-15">
-                                        @if (is_array($intervention->destinateur))
-                                        {{
-                                           implode(', ', $intervention->destinateur)
-                                         }}
-                                        @endif
-                                    </p>
+									<p class="col-sm-10">
+										{{ $userNamesString }}
+									</p>
 								</div>
 
                                 <div class="row">

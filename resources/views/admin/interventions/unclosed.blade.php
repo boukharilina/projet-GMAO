@@ -30,15 +30,16 @@
 					<table id="intervention-unclosed-table" class="datatable table table-hover table-center mb-0">
 						<thead>
 							<tr class="text-uppercase">
-							    <th>ETAT</th>
-								<th>CLIENT</th>
-								<th>EQUIPEMENT</th>
-								<th>EQUIPEMENT AVANT VISITE</th>
-								<th>INTERVENANT(s)</th>
-								<th>DESCRIPTION PANNE</th>
-                                <th>Priorité</th>
-                                <th>Date début</th>
-                                <th>Equipement après visite</th>
+							    <th>Etat</th>
+								<th>Client</th>
+								<th>Equipement</th>
+								<th>Panne Initial</th>
+								<th>Intervenant(s)</th>
+                                <th>Sous-traitant</th>
+                                <th>Sous equipement</th>
+								<th>Description Panne</th>
+                                <th>Heure/Date d'appel client</th>
+                                <th >Rapport </th>
 								<th class="action-btn">Action</th>
 							</tr>
 						</thead>
@@ -66,12 +67,12 @@
 @push('page-js')
 <script>
     // Show spinner when DataTable is processing
-     $('#intervention-unclosed-table').on('processing.dt', function(e, settings, processing) {
-      if (processing) {
+    $('#intervention-unclosed-table').on('processing.dt', function(e, settings, processing) {
+    if (processing) {
         $('#spinner').show();
-      } else {
-        $('#spinner').hide();
-      }
+    } else {
+    $('#spinner').hide();
+    }
     });
 
     $(document).ready(function() {
@@ -83,12 +84,13 @@
 				{data: 'etat', name: 'etat'},
                 {data: 'client', name: 'client'},
                 {data: 'equipement', name: 'equipement'},
-                {data: 'etat_initial', name: 'etat_initial'},
+                {data: 'type_panne', name: 'type_panne'},
                 {data: 'destinateur', name: 'destinateur'},
+                {data: 'soustraitant', name: 'soustraitant'},
+                {data: 'sousequipement', name: 'sousequipement'},
 				{data: 'description_panne', name: 'description_panne'},
-                {data: 'priorite', name: 'priorite'},
-                {	data: 'date_debut',
-                    name: 'date_debut',
+                {	data: 'appel_client',
+                    name: 'appel_client',
                     render: function(data, type, row) {
                         if (data) {
                             // Parse the date string using moment.js and format it as 'd-m-y hh:mm'
@@ -98,7 +100,18 @@
                         return '';
                     }
                 },
-                {data: 'etat_final', name: 'etat_final'},
+                {
+                data: 'rapport',
+                name: 'rapport',
+                render: function(data, type, row) {
+                    if (data) {
+                        return `<a href="{{ url('showrapport') }}/${row.id}" target="_blank" class="btn btn-primary">View</a>`;
+                    }
+                    return 'No Report';
+                },
+                orderable: false,
+                searchable: false
+            },
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]
         });

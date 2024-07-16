@@ -174,13 +174,13 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table id="intervention-table" class="datatable table table-hover table-center mb-0">
+                    <table id="intervention-unclosed-table" class="datatable table table-hover table-center mb-0">
                         <thead>
                             <tr class="text-uppercase">
                                 <th>Etat</th>
                                 <th>Client</th>
                                 <th>Equipement</th>
-                                <th>Interveant(s)</th>
+                                <th>Intervenant(s)</th>
                                 <th>Panne</th>
                             </tr>
                         </thead>
@@ -199,8 +199,8 @@
 @push('page-js')
 <script>
     $(document).ready(function() {
-        var table = $('#intervention-table').DataTable({
-            processing: true,
+        var table = $('#intervention-unclosed-table').DataTable({
+            processing: false,
             serverSide: false,
             ajax: "{{route('interventions.unclosed')}}",
             columns: [

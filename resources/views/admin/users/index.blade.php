@@ -3,7 +3,58 @@
 <x-assets.datatables />
 
 @push('page-css')
+<style>
+    body {
+        text-align: center;
+    }
 
+    .Container {
+        width: 100%;
+        overflow-y: auto;
+        background-color: #fff;
+        border-radius: 5px;
+        margin: 0 auto;
+        padding: 25px;
+        min-height: 400px; /* Adjust as needed */
+    }
+
+    .Content {
+        width: 100%;
+        color: #000;
+        text-align: center;
+    }
+
+    .Flipped,
+    .Flipped .Content {
+        transform: rotateX(180deg);
+    }
+
+    /* Designing for scroll-bar */
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: gainsboro;
+        border-radius: 5px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: rgb(149, 143, 143);
+        border-radius: 5px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+
+    .page-title {
+        text-align: left; /* Assurez-vous que le texte est aligné à gauche */
+    }
+</style>
 @endpush
 
 @push('page-header')
@@ -26,6 +77,8 @@
 		<div class="card">
 			<div class="card-body">
 				<div class="table-responsive">
+                    <div class="Container Flipped">
+                        <div class="Content">
 					<table id="user-table" class="table table-bordered table-hover">
 						<thead>
 							<tr style="boder:1px solid black;" class="text-uppercase">
@@ -54,6 +107,8 @@
 					</table>
 				</div>
 			</div>
+        </div>
+    </div>
 		</div>
 	</div>
 </div>
@@ -63,17 +118,13 @@
 <script>
     // Show spinner when DataTable is processing
     $('#user-table').on('processing.dt', function(e, settings, processing) {
-      if (processing) {
-        $('#spinner').show();
-        } else {
-        $('#spinner').hide();
-        }
+        $('#spinner-row').toggle(processing);
     });
 
     $(document).ready(function() {
         var table = $('#user-table').DataTable({
-            processing: false,
-            serverSide: false,
+            processing: true, // Enable server-side processing if needed
+            serverSide: false, // Adjust based on your server-side configuration
             ajax: "{{route('users.index')}}",
             columns: [
                 {data: 'avatar', name: 'avatar', orderable: false, searchable: false},
