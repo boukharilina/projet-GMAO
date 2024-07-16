@@ -173,9 +173,15 @@
 									<select class="select2 form-select form-control" name="destinateur[]" multiple>
                                         @foreach($users as $user)
                                             @if(in_array($user->id, $intervention->destinateur))
+<<<<<<< HEAD
                                                 <option selected value='{{ $user->id}}'>{{ $user->name }}</option>
                                             @else
                                                 <option value='{{ $user->id}}'>{{ $user->name }}</option>
+=======
+                                                <option selected value='{{ $user->id }}'>{{ $user->name }}</option>
+                                            @else
+                                                <option value='{{ $user->id }}'>{{ $user->name }}</option>
+>>>>>>> refs/remotes/origin/master
                                             @endif
                                         @endforeach
                                     </select>

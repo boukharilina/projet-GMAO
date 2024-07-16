@@ -17,6 +17,8 @@ use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 use QCod\AppSettings\Setting\AppSettings;
 use Carbon\Carbon;
+use PDF;
+use Illuminate\Support\Facades\Log;
 
 class InterventionController extends Controller
 {
@@ -29,24 +31,20 @@ class InterventionController extends Controller
     public function index(Request $request)
     {
         $title = 'interventions';
-        if($request->ajax()){
-            $interventions = Intervention::get();
-            return DataTables::of($interventions)
+        if ($request->ajax()) {
+            $interventions = Intervention::with('client', 'equipement')->get();
 
-                ->addColumn('etat',function($intervention){
+            return DataTables::of($interventions)
+                ->addColumn('etat', function($intervention) {
                     return '<a href="'.route("interventions.show", $intervention->id).'">'. $intervention->etat .'</a>';
                 })
-                ->addColumn('client',function($intervention){
-                    if(!empty($intervention->client)){
-                        return $intervention->client->name;
-                    }
+                ->addColumn('client', function($intervention) {
+                    return $intervention->client ? $intervention->client->name : '';
                 })
-                ->addColumn('equipement',function($intervention){
-                    if(!empty($intervention->equipement)){
-                        return $intervention->equipement->modele;
-                    }
+                ->addColumn('equipement', function($intervention) {
+                    return $intervention->equipement ? $intervention->equipement->modele : '';
                 })
-                ->addColumn('etat_initial',function($intervention){
+                ->addColumn('etat_initial', function($intervention) {
                     return $intervention->etat_initial;
                 })
                 ->addColumn('destinateur', function($intervention) {
@@ -58,17 +56,19 @@ class InterventionController extends Controller
                     $userNames = User::whereIn('id', $userIds)->pluck('name')->toArray();
                     return implode(', ', $userNames);
                 })
-
-                ->addColumn('date_debut',function($intervention){
+                ->addColumn('date_debut', function($intervention) {
                     return $intervention->date_debut;
                 })
-                ->addColumn('etat_final',function($intervention){
+                ->addColumn('etat_final', function($intervention) {
                     return $intervention->etat_final;
                 })
-                ->addColumn('action', function ($row) {
+                ->addColumn('rapport', function($intervention) {
+                    return $intervention->rapport;
+                })
+                ->addColumn('action', function($row) {
                     $editbtn = '<a href="'.route("interventions.edit", $row->id).'" class="editbtn"><button class="btn btn-primary" title="Modifier"><i class="fas fa-edit"></i></button></a>';
                     $viewbtn = '<a href="'.route("interventions.show", $row->id).'" class="viewbtn"><button class="btn btn-success" title="Voir"><i class="fas fa-eye"></i></button></a>';
-                    $deletebtn = '<a data-id="'.$row->id.'" data-route="'.route('interventions.destroy',$row->id).'" href="javascript:void(0)" id="deletebtn"><button class="btn btn-danger" title="Supprimer"><i class="fas fa-trash"></i></button></a>';
+                    $deletebtn = '<a data-id="'.$row->id.'" data-route="'.route('interventions.destroy', $row->id).'" href="javascript:void(0)" id="deletebtn"><button class="btn btn-danger" title="Supprimer"><i class="fas fa-trash"></i></button></a>';
                     if ($row->trashed()) {
                         $deletebtn = ''; // Or you can show a restore button
                     }
@@ -81,16 +81,34 @@ class InterventionController extends Controller
                     if (!auth()->user()->hasPermissionTo('view-intervention')) {
                         $viewbtn = '';
                     }
-                    $btn = $editbtn.' '.$deletebtn.' '.$viewbtn;
-                    return $btn;
+                    return $editbtn.' '.$deletebtn.' '.$viewbtn;
                 })
-                ->rawColumns(['etat','action'])
+                ->rawColumns(['etat', 'action'])
                 ->make(true);
         }
-        return view('admin.interventions.index',compact(
-            'title'
-        ));
+
+        return view('admin.interventions.index', compact('title'));
     }
+
+    public function showrapport($id)
+    {
+        $intervention = Intervention::findOrFail($id);
+
+        $pdfPath = public_path('storage/interventions/' . $intervention->rapport);
+
+        Log::info('Attempting to access PDF at path: ' . $pdfPath);
+
+        if (!file_exists($pdfPath)) {
+            Log::error('PDF not found at path: ' . $pdfPath);
+            abort(404, 'PDF not found');
+        }
+
+        return response()->file($pdfPath);
+    }
+
+
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -228,36 +246,37 @@ class InterventionController extends Controller
         ));
     }
 
-    public function show($id){
+    public function show($id) {
         $title = 'intervention';
         $intervention = Intervention::findOrFail($id);
         $clients = Client::get();
-        $equipements= Equipement::get();
-        $sousequipements= Sousequipement::get();
-        $users= User::get();
+        $equipements = Equipement::get();
+        $sousequipements = Sousequipement::get();
+        $users = User::get();
         $etats = Etat::get();
         $soustraitants = Soustraitant::get();
         $sousinterventions = $intervention->sousinterventions;
         $pieces = $intervention->pieces;
-         // Check if the destinateur is already an array
-         $userIds = is_array($intervention->destinateur) ? $intervention->destinateur : json_decode($intervention->destinateur, true);
-         if (!is_array($userIds)) {
-             $userNamesString = ''; // Set empty string if json_decode fails
-         } else {
-             $userNames = User::whereIn('id', $userIds)->pluck('name')->toArray();
-             $userNamesString = implode(', ', $userNames);
-         }
-     
-         // If you need to pass the userNamesString to the view, add it to the compact function
-         return view('admin.interventions.show', compact(
-             'title', 'clients', 'sousequipements', 'intervention',
-             'users', 'equipements', 'soustraitants', 'sousinterventions', 'pieces', 'etats', 'userNamesString'
-         ));
-       
-        return Carbon::createFromTimeStamp($date_fin_global)->toDateString();
 
+        // Check if the destinateur is already an array
+        $userIds = is_array($intervention->destinateur) ? $intervention->destinateur : json_decode($intervention->destinateur, true);
+        if (!is_array($userIds)) {
+            $userNamesString = ''; // Set empty string if json_decode fails
+        } else {
+            $userNames = User::whereIn('id', $userIds)->pluck('name')->toArray();
+            $userNamesString = implode(', ', $userNames);
+        }
 
+        // If you need to pass the userNamesString to the view, add it to the compact function
+        return view('admin.interventions.show', compact(
+            'title', 'clients', 'sousequipements', 'intervention',
+            'users', 'equipements', 'soustraitants', 'sousinterventions', 'pieces', 'etats', 'userNamesString'
+        ));
     }
+
+
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -294,10 +313,12 @@ class InterventionController extends Controller
                     return $intervention->type_panne;
                 })
                 ->addColumn('destinateur',function($intervention){
-                    if (is_array($intervention->destinateur)) {
-                        return implode(', ', $intervention->destinateur);
+                    $userIds = is_array($intervention->destinateur) ? $intervention->destinateur : json_decode($intervention->destinateur, true);
+                    if (!is_array($userIds)) {
+                        return ''; // Return empty string if json_decode fails
                     }
-                    return $intervention->destinateur;
+                    $userNames = User::whereIn('id', $userIds)->pluck('name')->toArray();
+                    return implode(', ', $userNames);
                 })
                 ->addColumn('soustraitant',function($intervention){
                     if(!empty($intervention->soustraitant)){
@@ -314,6 +335,9 @@ class InterventionController extends Controller
                 })
                 ->addColumn('type_intervention',function($intervention){
                     return $intervention->type_intervention;
+                })
+                ->addColumn('rapport', function($intervention) {
+                    return $intervention->rapport;
                 })
                 ->addColumn('action', function ($row) {
                     $editbtn = '<a href="'.route("interventions.edit", $row->id).'" class="editbtn"><button class="btn btn-primary"><i class="fas fa-edit"></i></button></a>';
@@ -366,10 +390,12 @@ class InterventionController extends Controller
                     return $intervention->type_panne;
                 })
                 ->addColumn('destinateur',function($intervention){
-                    if (is_array($intervention->destinateur)) {
-                        return implode(', ', $intervention->destinateur);
+                    $userIds = is_array($intervention->destinateur) ? $intervention->destinateur : json_decode($intervention->destinateur, true);
+                    if (!is_array($userIds)) {
+                        return ''; // Return empty string if json_decode fails
                     }
-                    return $intervention->destinateur;
+                    $userNames = User::whereIn('id', $userIds)->pluck('name')->toArray();
+                    return implode(', ', $userNames);
                 })
                 ->addColumn('soustraitant',function($intervention){
                     if(!empty($intervention->soustraitant)){

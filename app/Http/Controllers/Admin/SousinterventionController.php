@@ -6,7 +6,7 @@ use App\Models\Intervention;
 use App\Models\User;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
-use QCod\AppSettings\Setting\AppSettings; 
+use QCod\AppSettings\Setting\AppSettings;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -168,7 +168,7 @@ class SousinterventionController extends Controller
             'etat_final'=>$request->etat_final,
             'intervenant'=>$request->intervenant,
             'description_panne'=>$request->description_panne,
-            'description_sousintervention'=>$request->description_sousintervention,
+            'description_sousintervention'=>$request->description_sousintervention,  
             'rapport'=>$rapportName,
 
         ]);

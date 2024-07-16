@@ -29,7 +29,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('emails:send')->weeklyOn(1, '14:20');
+        $schedule->command('emails:send')->weeklyOn(1, '11:00');
     }
 
 

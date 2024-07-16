@@ -26,7 +26,7 @@ class Intervention extends Model
     public function client(){
 
         return $this->belongsTo(Client::class);
-    }
+    }  
 
     public function equipement(){
 
@@ -45,7 +45,7 @@ class Intervention extends Model
     {
         return $this->HasMany(Sousintervention::class);
     }
- 
+
     public function pieces():HasMany
     {
         return $this->HasMany(Piece::class);

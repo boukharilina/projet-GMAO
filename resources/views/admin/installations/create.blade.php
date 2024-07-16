@@ -20,6 +20,7 @@
 	<div class="col-sm-12">
 		<div class="card">
 			<div class="card-body custom-edit-service">
+<<<<<<< HEAD
 				<!-- Add tache -->
 				<form method="post" enctype="multipart/form-data" action="{{ route('installations.store') }}">
 					@csrf
@@ -30,6 +31,20 @@
 									<label>Client<span class="text-danger">*</span></label>
 									<select class="select2 form-select form-control" name="client">
 										<option>Sélectionner le client</option>
+=======
+
+
+			<!-- Add tache -->
+			<form method="post" enctype="multipart/form-data" action="{{route('installations.store')}}">
+				@csrf
+				<div class="service-fields mb-3">
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="form-group">
+								<label>Client<span class="text-danger">*</span></label>
+								<select  class="select2 form-select form-control" name="client" >
+									<option >Sélectionner le client</option>
+>>>>>>> refs/remotes/origin/master
 										@foreach($clients as $client)
 											<option value="{{ $client->id }}">{{ $client->name }}</option>
 										@endforeach
@@ -73,6 +88,7 @@
 							</div>
 						</div>
 					</div>
+<<<<<<< HEAD
 
 					<table class="table table-bordered" id="table">
 						<tr>
@@ -118,6 +134,38 @@
 							</div>
 						</div>
 					</div>
+=======
+				</div>
+
+            	<div class="service-fields mb-3">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>Etat<span class="text-danger">*</span></label>
+                                <select  class="select2 form-select form-control" name="status">
+                                <option >Sélectionner l'etat de l'installation</option>
+                                <option value="Contrat pieces et main oeuvre">Contrat pieces et main oeuvre</option>
+                                <option value="Contrat main oeuvre">Contrat main oeuvre</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+				<div class="service-fields mb-3">
+					<div class="row">
+						<div class="col-12">
+							<label>Commentaire</label>
+							<textarea name="description" class="form-control" cols="30" rows="10"></textarea>
+						</div>
+					</div>
+				</div>
+
+				<div class="submit-section">
+					<button class="btn btn-primary submit-btn" type="submit" name="form_submit" value="submit">Valider</button>
+				</div>
+			</form>
+			<!-- /Add installations -->
+>>>>>>> refs/remotes/origin/master
 
 					<div class="service-fields mb-3">
 						<div class="row">
@@ -137,12 +185,13 @@
 				<!-- /Add installations -->
 			</div>
 		</div>
-	</div>			
+	</div>
 </div>
-@endsection	
+@endsection
 
 @push('page-js')
 	<!-- Datetimepicker JS -->
+<<<<<<< HEAD
 	<script src="{{ asset('assets/js/moment.min.js') }}"></script>
 	<script src="{{ asset('assets/js/bootstrap-datetimepicker.min.js') }}"></script>	
 	<script>
@@ -174,6 +223,11 @@
 				'</tr>'
 			);
 		});
+=======
+	<script src="{{asset('assets/js/moment.min.js')}}"></script>
+	<script src="{{asset('assets/js/bootstrap-datetimepicker.min.js')}}"></script>
+@endpush
+>>>>>>> refs/remotes/origin/master
 
 		$(document).on('click', '.remove-table-row', function() {
 			$(this).closest('tr').remove();

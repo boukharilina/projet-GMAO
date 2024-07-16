@@ -58,9 +58,11 @@
 								<td>{{$equipement->designation}}</td>
 								<td>{{$equipement->modele}}</td>
 								<td>{{$equipement->numserie}}</td>
-								<td>{{date('d-m-Y', strtotime($equipement->date_installation))}}</td>
+								<td>{{$equipement->date_installation}}</td>
 								<td>{{$equipement->software}}</td>
+                                @if(!empty($equipement->client))
                                 <td>{{$equipement->client->name}}</td>
+                                @endif
                                 <td class="text-center">
                                     <a href="{{route('equipements.edit', $equipement->id)}}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
 									<a href="{{route('equipements.show', $equipement->id)}}" class="btn btn-success btn-sm"><i class="fas fa-eye"></i></a>
@@ -82,7 +84,7 @@
 </div>
 
 
-	
+
 @endsection
 
 

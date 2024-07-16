@@ -59,7 +59,7 @@ class SendEmails extends Command
                     Mail::send([], [], function ($message) use ($toEmail, $subject, $contract, $daysLeft, $files) {
                         $body = '
                             <p>Le contrat de maintenance du client : ' . $contract->client->name . ' approche de son expiration le ' . $contract->date_fin . '.</p>
-                            <p>Il reste ' . $daysLeft . ' pour l’expiration du contrat.</p>
+                            <p>Il reste ' . $daysLeft . ' jours pour l’expiration du contrat.</p>
                             <p>Merci de prendre les mesures nécessaires pour assurer le suivi de ce dossier.</p>
                             <p>Ci-joint, vous trouverez le modèle de lettre à envoyer pour le client.</p>
                             <p>Cordialement,</p>
